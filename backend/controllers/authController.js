@@ -6,6 +6,10 @@ const registerUser = async (req, res) => {
     try {   
     const { name, surname, address, email, phone, password } = req.body;
         console.log("REGISTER BODY", req.body);
+
+        if (!name || !surname || !address || !email || !phone || !password) {
+        return res.status(400).json({ message: 'Bitte füllen Sie alle Felder aus' });
+    }
     
 
     const existingUser = await User.findOne({ email });
