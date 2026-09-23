@@ -54,5 +54,51 @@ const registerUser = async (req, res) => {
     }
     };
 
-    module.exports = {registerUser};
+
+
+    const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Bitte E-Mail und Passwort angeben' });
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) {
+        return res.status(400).json({ message: 'Ungültige E-Mail oder Passwort' });
+    }
+    
+    const isPasswordValid = await bcrypt.compare(password, user.password);      
+    if (!isPasswordValid) {
+        return res.status(400).json({ message: 'Ungültige E-Mail oder Passwort' });
+    }
+
+    const token = jwt.sign(
+        { id: user._id, role: user.role },
+        process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.status(200).json({
+        message: 'Erfolgreich eingeloggt',
+        token,
+        user: {
+            id: user._id,
+            name: user.name,
+            surname: user.surname,
+            address: user.address,
+            email: user.email,
+            phone: user.phone,
+            role: user.role,
+        }
+    });
+    } catch (error) {
+        console.error('Login-Fehler:', error);
+        res.status(500).json({ message: 'Fehler beim Einloggen.' });
+    }
+};
+
+
+
+    module.exports = {registerUser, loginUser};
 
