@@ -5,14 +5,16 @@ require('dotenv').config();
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const app = express();
+const sellRequestRoutes = require('./routes/sellRequestRoutes');
 
 
 connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 app.use('/api/auth', authRoutes);
-
+app.use('/api/sell-requests', sellRequestRoutes);
 app.get('/api/status', (req, res) => {
     res.json({
         message: 'Issa Aoutomobile API läuft erfolgreich'

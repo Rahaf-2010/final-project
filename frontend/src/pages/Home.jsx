@@ -1,4 +1,7 @@
+import {useNavigate} from "react-router-dom";
+
 function Home() {
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -17,7 +20,7 @@ function Home() {
 
             <div>
                 <button>Auto Kaufen</button>
-                <button>Auto Verkaufen</button>
+                <button onClick={() => navigate("/sell-request")}>Auto Verkaufen</button>
                 <button>Meine Anfragen</button>
                 <button>Über uns</button>
             </div>
