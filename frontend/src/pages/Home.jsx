@@ -11,11 +11,24 @@ function Home() {
 
             <div>
                 <h2>Unsere Dienstleistungen</h2>
-
-                <p>Ankauf und Verkauf von Gebrauchtfahrzeugen aller Art</p>
-                <p>Umfassende Fahrzeugprüfung</p>
-                <p>Kostenlose Probefahrt</p>
-                <p>Kostenlose Abholung</p>
+                <div>
+                    <div>
+                        <h3>Ankauf und Verkauf</h3>
+                        <p>Wir kaufen und verkaufen Gebrauchtfahrzeuge aller Art</p>
+                    </div>
+                    <div>
+                        <h3>Umfassende Fahrzeugprüfung</h3>
+                        <p>Jedes Fahrzeug wird sorgfältig und umfassend geprüft</p>
+                    </div>
+                    <div>
+                        <h3>Kostenlose Probefahrt</h3>
+                        <p>Bei Interesse können Sie eine kostenlose Probefahrt vereinbaren</p>
+                    </div>
+                    <div>
+                        <h3>Kostenlose Abholung</h3>
+                        <p>Wir bieten eine kostenlose Abholung Ihres Fahrzeugs an</p>
+                    </div>
+                </div>
             </div>
 
             <div>

@@ -7,6 +7,10 @@ const carSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        offerNumber: {
+            type: Number,
+            unique: true,
+        },
         brandModel: {
             type: String,
             required: true,
