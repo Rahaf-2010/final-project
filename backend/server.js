@@ -7,6 +7,8 @@ const authRoutes = require('./routes/authRoutes');
 const app = express();
 const sellRequestRoutes = require('./routes/sellRequestRoutes');
 const carRoutes = require('./routes/carRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+
 
 
 connectDB();
@@ -17,6 +19,7 @@ app.use("/uploads", express.static("uploads"));
 app.use('/api/auth', authRoutes);
 app.use('/api/sell-requests', sellRequestRoutes);
 app.use('/api/cars', carRoutes);
+app.use('/api/reviews', reviewRoutes);
 app.get('/api/status', (req, res) => {
     res.json({
         message: 'Issa Aoutomobile API läuft erfolgreich'
