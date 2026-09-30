@@ -121,6 +121,7 @@ function SellRequest() {
                     placeholder="Telefonnummer"
                     value={formData.phone}
                     onChange={handleChange}
+                    required
                 />
                 <input
                     type="email"
@@ -128,6 +129,7 @@ function SellRequest() {
                     placeholder="E-Mail-Adresse"
                     value={formData.email}
                     onChange={handleChange}
+                    required
                 />
                 <label>Bilder des Fahrzeugs:</label>
                 <input

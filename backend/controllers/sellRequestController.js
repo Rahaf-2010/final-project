@@ -41,4 +41,59 @@ const getSellRequests = async (req, res) => {
     }
 };
 
-module.exports = { createSellRequest, getSellRequests };
+const updateSellRequest = async (req, res) => {
+    try{
+        const request = await SellRequest.findOne({ _id: req.params.id, user: req.user.id });
+
+        if (!request) {
+            return res.status(404).json({ message: 'Verkaufsanfrage nicht gefunden' });
+        }
+        if (request.status !== 'In Bearbeitung') {
+            return res.status(400).json({ message: "Diese Anfrage kann nicht mehr bearbeitet werden" });
+        }
+
+        const { vehicleType, brandModel, year, mileage, desiredPrice, phone, email } = req.body;
+
+        request.vehicleType = vehicleType;
+        request.brandModel = brandModel;
+        request.year = year;
+        request.mileage = mileage;
+        request.desiredPrice = desiredPrice;
+        request.phone = phone;
+        request.email = email;
+
+        if (req.files && req.files.length > 0) {
+            request.images = req.files.map((file) => `/uploads/${file.filename}`);
+        }
+
+        await request.save();
+
+        res.status(200).json({ message: 'Verkaufsanfrage erfolgreich aktualisiert', request });
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren der Verkaufsanfrage:', error);
+
+        res.status(500).json({ message: 'Die Verkaufsanfrage konnte nicht aktualisiert werden' });
+    }
+};
+
+const deleteSellRequest = async (req, res) => {
+    try {
+        const request = await SellRequest.findOne({
+            _id: req.params.id,
+            user: req.user.id
+        });
+        if (!request) {
+            return res.status(404).json({ message: "Verkauf Anfrage nicht gefunden" });
+        }
+        await request.deleteOne();
+        res.status(200).json({ message: "Diese Anfrage wurde erfolgreich gelöscht" });
+    } catch (error) {
+        console.error("Fehler beim Löschen der Anfrage:", error);
+
+        res.status(500).json({ message: "Die Verkaufsanfrage konnte nicht gelöscht werden" });
+    }
+};
+
+
+
+module.exports = { createSellRequest, getSellRequests, updateSellRequest, deleteSellRequest };

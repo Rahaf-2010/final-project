@@ -6,6 +6,7 @@ import SellRequest from "./pages/SellRequest";
 import Cars from "./pages/Cars";
 import CarDetails from "./pages/CarDetails";
 import AboutUs from "./pages/AboutUs";
+import MeineAnfragen from "./pages/MeineAnfragen";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -26,6 +27,7 @@ function App() {
         <Route path="/cars" element={<Cars/>} />
         <Route path="/cars/:id" element={<CarDetails/>} />
         <Route path="/about-us" element={<AboutUs/>} />
+        <Route path="/meine-anfragen" element={<ProtectedRoute><MeineAnfragen/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

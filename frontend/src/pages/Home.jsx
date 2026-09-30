@@ -12,7 +12,7 @@ function Home() {
             <div>
                 <button onClick={() => navigate("/cars")}>Auto Kaufen</button>
                 <button onClick={() => navigate("/sell-request")}>Auto Verkaufen</button>
-                <button>Meine Anfragen</button>
+                <button onClick={() => navigate("/meine-anfragen")}>Meine Anfragen</button>
                 <button onClick={() => navigate("/about-us")}>Über uns</button>
             </div>
         </div>
