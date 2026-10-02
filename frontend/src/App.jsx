@@ -7,6 +7,7 @@ import Cars from "./pages/Cars";
 import CarDetails from "./pages/CarDetails";
 import AboutUs from "./pages/AboutUs";
 import MeineAnfragen from "./pages/MeineAnfragen";
+import Navbar from "./components/Navbar";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -19,6 +20,7 @@ function ProtectedRoute({ children }) {
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />

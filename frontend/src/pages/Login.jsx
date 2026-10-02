@@ -56,6 +56,10 @@ function Login() {
                     />
                 <button type="submit">Login</button>
             </form>
+
+            <p>Noch keinen Account? {""}
+                <button type="button" onClick={() => navigate("/register")}>Jetzt registrieren</button>
+            </p>
             
             {message && <p>{message}</p>}
         </div>
