@@ -37,22 +37,11 @@ const carSchema = new mongoose.Schema(
             trim: true,
             default: '',
         },
-        sellerName: {
+        color: {
             type: String,
-            required: true,
             trim: true,
+            default: '',
         },
-        sellerEmail: {
-            type: String,
-            required: true,
-            trim: true,
-            lowercase: true,
-        },
-        sellerPhone: {
-            type: String,
-            required: true,
-            trim: true,
-        }
     },
     {
         timestamps: true,

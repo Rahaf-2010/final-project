@@ -34,7 +34,7 @@ function Cars() {
         const matchesSearch = car.brandModel.toLowerCase().includes(searchtext);
 
         const matchesType = vehicleType === "" || car.vehicleType.toLowerCase() === vehicleType.toLowerCase();
-
+ 
         const matchesMinPrice = minPrice === "" || car.price >= Number(minPrice);
 
         const matchesMaxPrice = maxPrice === "" || car.price <= Number(maxPrice);
@@ -117,6 +117,7 @@ function Cars() {
                     {filteredCars.map((car) => (
                         <div key={car._id}>
                             <h2>{car.brandModel}</h2>
+                            <p>Angebotsnummer: {car.offerNumber}</p>
                             {car.images && car.images.length > 0 && (
                                 <div>
                                     {car.images.map((image, index) => (
@@ -131,6 +132,7 @@ function Cars() {
                             <p>Fahrzeugtyp: {car.vehicleType}</p>
                             <p>Baujahr: {car.year}</p>
                             <p>Kilometerstand: {car.mileage} km</p>
+                            <p>Farbe: {car.color}</p>
                             <p>Preis: {car.price} €</p>
 
                             {car.description && (<p>Beschreibung: {car.description}</p>)}

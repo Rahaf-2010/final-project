@@ -8,6 +8,7 @@ const app = express();
 const sellRequestRoutes = require('./routes/sellRequestRoutes');
 const carRoutes = require('./routes/carRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/sell-requests', sellRequestRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/admin', adminRoutes);
 app.get('/api/status', (req, res) => {
     res.json({
         message: 'Issa Aoutomobile API läuft erfolgreich'
