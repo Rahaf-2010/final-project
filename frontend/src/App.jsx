@@ -9,6 +9,9 @@ import AboutUs from "./pages/AboutUs";
 import MeineAnfragen from "./pages/MeineAnfragen";
 import Navbar from "./components/Navbar";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminCars from "./pages/AdminCars";
+import AdminSellRequests from "./pages/AdminSellRequest";
+
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -32,6 +35,8 @@ function App() {
         <Route path="/about-us" element={<AboutUs/>} />
         <Route path="/meine-anfragen" element={<ProtectedRoute><MeineAnfragen/></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard/></ProtectedRoute>} />
+        <Route path="/admin/cars" element={<ProtectedRoute><AdminCars/></ProtectedRoute>} />
+        <Route path="/admin/sell-requests" element={<ProtectedRoute><AdminSellRequests/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

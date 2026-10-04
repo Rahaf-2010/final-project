@@ -94,6 +94,42 @@ const deleteSellRequest = async (req, res) => {
     }
 };
 
+const getAllSellRequests = async (req, res) => {
+    try {
+        const requests = await SellRequest.find().sort({ createdAt: -1 }).populate('user', 'name surname email phone adress');
+
+        res.status(200).json(requests);
+    } catch (error) {
+        console.error('Fehler beim Abrufen aller Verkaufsanfragen:', error);
+        res.status(500).json({ message: 'Die Anfragen konnten nicht abgerufen werden' });
+    }
+};
+
+const updateSellRequestStatus = async (req, res) => {
+    try{
+        const{ status } = req.body;
+        const allowedStatuses = ['In Bearbeitung', 'Angenommen', 'Abgelehnt'];
+
+        if (!allowedStatuses.includes(status)) {
+            return res.status(400).json({ message: "Ungültiger Status" });
+        }
+
+        const request = await SellRequest.findById(req.params.id);
+        if (!request) {
+            return res.status(404).json({ message: 'Verkaufsanfrage nicht gefunden' });
+        }
+
+        request.status = status;
+        await request.save();
+
+        res.status(200).json({ message: 'Status erfolgreich aktualisiert', request });
+    } catch (error) {
+        console.error('Fehler beim Aktualisieren des Status der Verkaufsanfrage:', error);
+        res.status(500).json({ message: 'Der Status der Verkaufsanfrage konnte nicht aktualisiert werden' });
+    }
+};
+    
 
 
-module.exports = { createSellRequest, getSellRequests, updateSellRequest, deleteSellRequest };
+
+module.exports = { createSellRequest, getSellRequests, updateSellRequest, deleteSellRequest, getAllSellRequests, updateSellRequestStatus };
