@@ -135,7 +135,7 @@ function Cars() {
                             <p>Farbe: {car.color}</p>
                             <p>Preis: {car.price} €</p>
 
-                            {car.description && (<p>Beschreibung: {car.description}</p>)}
+                            {/* {car.description && (<p>Beschreibung: {car.description}</p>)} */}
 
                             <button onClick={() => navigate(`/cars/${car._id}`)}>Details ansehen</button>
                         </div>

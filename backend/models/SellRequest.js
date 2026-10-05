@@ -39,6 +39,11 @@ const sellrequesteSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },          
+        additionalInfo: {
+            type: String,
+            trim: true,
+            default: '',
+        },
         status: {
             type: String,
             enum: ['In Bearbeitung', 'Angenommen', 'Abgelehnt'],

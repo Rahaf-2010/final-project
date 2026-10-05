@@ -4,6 +4,9 @@ import api from "../services/api";
 function AdminSellRequests() {
     const [sellRequests, setSellRequests] = useState([]);
     const [message, setMessage] = useState("");
+    const [selectedImage, setSelectedImage] = useState([null]);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    
 
     useEffect(() => {
         const fetchSellRequests = async () => {
@@ -42,6 +45,25 @@ function AdminSellRequests() {
                 setMessage(error.response?.data?.message || "Der Status konnte nicht aktualisiert werden.");
             }
         };
+
+    const handleDelete = async (id) => {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await api.delete(`/sell-requests/admin/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setSellRequests((prev) => prev.filter((request) => request._id !== id));
+            setMessage(response.data.message || "Die Verkaufsanfrage wurde erfolgreich gelöscht.");
+        } catch (error) {
+            console.error("Fehler beim Löschen der Anfrage:", error);
+            setMessage(error.response?.data?.message || "Die Verkaufsanfrage konnte nicht gelöscht werden.");
+        }
+    };
+
+
+
     return (
         <div>
             <h1>Verkaufsanfragen</h1>
@@ -62,16 +84,58 @@ function AdminSellRequests() {
                         <p>Kilometerstand: {request.mileage} km</p>
                         <p>Preis: {request.desiredPrice} €</p>
                         <p>Status: {request.status}</p>
+                        {request.additionalInfo && (
+                            <p>Zusätzliche Informationen: {request.additionalInfo}</p>
+                        )}
                         {request.images && request.images.length > 0 && (
                             <div>
                                 {request.images.map((image, index) => (
                                     <img key={index} 
                                     src={`http://localhost:5000${image}`} 
                                     alt={`${request.brandModel} $${index + 1}`}
-                                    style={{ width: "150px",height: "100px",objectFit: "cover", margin: "5px" }} />
+                                    onClick={() => {
+                                        setSelectedImage(image);
+                                        setSelectedImageIndex(index);
+                                    }}
+                                    style={{ width: "180px",
+                                            height: "120px",
+                                            objectFit: "cover",
+                                            margin: "5px",
+                                            cursor: "pointer" }} />
                                 ))}
-                            </div>
-                        )}
+                                {selectedImage && (
+                                    <div>
+                                        <button onClick={() => setSelectedImage(null)}>x</button>
+
+                                        <img 
+                                            src={`http://localhost:5000${selectedImage}`}
+                                            alt={request.brandModel}
+                                            style={{width: '400px', height: 'auto'}} 
+                                        />
+
+                                        <button
+                                        onClick={() => {
+                                            const previousIndex = selectedImageIndex === 0 ? request.images.length - 1 : selectedImageIndex - 1;
+                                            setSelectedImage(request.images[previousIndex]);
+                                            setSelectedImageIndex(previousIndex);
+                                        }}
+                                        >
+                                            zurück
+                                        </button>
+                                        <button
+                                        onClick={() => {
+                                            const nextIndex = selectedImageIndex === request.images.length - 1 ? 0 : selectedImageIndex + 1;
+                                            setSelectedImage(request.images[nextIndex]);
+                                            setSelectedImageIndex(nextIndex);
+                                        }}
+                                        >
+                                            Nächste
+                                        </button>
+                                    </div>
+
+                                )}
+                        </div>
+                                            )}
 
                         <div>
                             <button
@@ -85,6 +149,10 @@ function AdminSellRequests() {
                             <button
                                 type="button"
                                 onClick={() => handleStatusChange(request._id, 'Abgelehnt')}>Abgelehnt
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => handleDelete(request._id)}>Löschen
                             </button>
                         </div>
                     </div>

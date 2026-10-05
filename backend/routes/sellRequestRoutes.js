@@ -3,7 +3,7 @@ const express = require('express');
 const upload = require('../middleware/uploadMiddleware');
 
 const {createSellRequest, getSellRequests, updateSellRequest, 
-    deleteSellRequest, getAllSellRequests, updateSellRequestStatus} = require('../controllers/sellRequestController');
+    deleteSellRequest, getAllSellRequests, updateSellRequestStatus, deleteSellRequestByAdmin } = require('../controllers/sellRequestController');
 
 const {protect, adminOnly} = require('../middleware/authMiddleware');
 
@@ -15,6 +15,7 @@ router.put('/:id', protect, upload.array('images', 20), updateSellRequest);
 router.delete('/:id', protect, deleteSellRequest);
 router.get('/admin', protect, adminOnly, getAllSellRequests);
 router.put('/admin/:id/status', protect, adminOnly, updateSellRequestStatus);
+router.delete('/admin/:id', protect, adminOnly, deleteSellRequestByAdmin);
 
 
 

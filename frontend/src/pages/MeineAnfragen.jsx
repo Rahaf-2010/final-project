@@ -41,6 +41,7 @@ const MeineAnfragen = () => {
             formData.append("desiredPrice", editingRequest.desiredPrice);
             formData.append("phone", editingRequest.phone);
             formData.append("email", editingRequest.email);
+            formData.append("additionalInfo", editingRequest.additionalInfo || "");
             editImages.forEach((image) => {
                 formData.append("images", image);
             });
@@ -107,6 +108,10 @@ const MeineAnfragen = () => {
                             <p>Telefonnummer: {request.phone}</p>
                             <p>E-Mail-Adresse: {request.email}</p>
                             <p>Status: <strong>{request.status}</strong></p>
+
+                            {request.additionalInfo && (
+                                <p>Zusätzliche Informationen: {request.additionalInfo}</p>
+                            )}
 
                             
                                 <button 
@@ -197,6 +202,15 @@ const MeineAnfragen = () => {
                             onChange={(e) => setEditingRequest({ ...editingRequest, email: e.target.value })}
                             placeholder="E-Mail"
                         />
+                        <div>
+                            <label>Zusätzliche Informationen (optional):</label>
+                            <textarea
+                                value={editingRequest.additionalInfo || ""}
+                                onChange={(e) => setEditingRequest({ ...editingRequest, additionalInfo: e.target.value })}
+                                placeholder="Weitere Informationen zu Ihrem Fahrzeug"
+                                rows={4}
+                            />
+                        </div>
                         <input
                             type="file"
                             multiple

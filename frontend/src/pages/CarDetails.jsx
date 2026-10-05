@@ -99,27 +99,6 @@ function CarDetails() {
                 {car.offerNumber} an.</p>
             )}
 
-            <div>
-                <h2>Kontakt zum Verkäufer</h2>
-                <p>Name: {car.sellerName}</p>
-
-                <p>E-mail:{" "}
-                    <a href={`mailto:${car.sellerEmail}`}>{car.sellerEmail}</a>
-                </p>
-
-                <p>Telefon: {" "}
-                    <a href={`tel:${car.sellerPhone}`}>{car.sellerPhone}</a>
-                </p>
-
-                <a 
-                    href={`https://wa.me/${car.sellerPhone.replace(/\D/g, '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    WhatsApp
-                </a>
-                
-            </div>
         </div>
     ); 
 }

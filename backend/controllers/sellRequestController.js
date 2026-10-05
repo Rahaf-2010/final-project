@@ -2,7 +2,7 @@ const SellRequest = require('../models/SellRequest');
 
 const createSellRequest = async (req, res) => {
     try {
-        const { vehicleType, brandModel, year, mileage, desiredPrice, phone, email, images } = req.body;
+        const { vehicleType, brandModel, year, mileage, desiredPrice, phone, email, additionalInfo, images } = req.body;
 
         const imagePaths = req.files
             ? req.files.map((file) => `/uploads/${file.filename}`)
@@ -17,6 +17,7 @@ const createSellRequest = async (req, res) => {
             desiredPrice,
             phone,
             email,
+            additionalInfo,
             images: imagePaths,
         });
 
@@ -52,7 +53,7 @@ const updateSellRequest = async (req, res) => {
             return res.status(400).json({ message: "Diese Anfrage kann nicht mehr bearbeitet werden" });
         }
 
-        const { vehicleType, brandModel, year, mileage, desiredPrice, phone, email } = req.body;
+        const { vehicleType, brandModel, year, mileage, desiredPrice, phone, email, additionalInfo } = req.body;
 
         request.vehicleType = vehicleType;
         request.brandModel = brandModel;
@@ -61,6 +62,7 @@ const updateSellRequest = async (req, res) => {
         request.desiredPrice = desiredPrice;
         request.phone = phone;
         request.email = email;
+        request.additionalInfo = additionalInfo;
 
         if (req.files && req.files.length > 0) {
             request.images = req.files.map((file) => `/uploads/${file.filename}`);
@@ -96,7 +98,7 @@ const deleteSellRequest = async (req, res) => {
 
 const getAllSellRequests = async (req, res) => {
     try {
-        const requests = await SellRequest.find().sort({ createdAt: -1 }).populate('user', 'name surname email phone adress');
+        const requests = await SellRequest.find().sort({ createdAt: -1 }).populate('user', 'name surname email phone address');
 
         res.status(200).json(requests);
     } catch (error) {
@@ -128,8 +130,23 @@ const updateSellRequestStatus = async (req, res) => {
         res.status(500).json({ message: 'Der Status der Verkaufsanfrage konnte nicht aktualisiert werden' });
     }
 };
-    
+
+const deleteSellRequestByAdmin = async (req, res) => {
+    try {
+        const request = await SellRequest.findById(req.params.id);
+        if (!request) {
+            return res.status(404).json({ message: "Verkaufsanfrage nicht gefunden" });
+        }
+        await request.deleteOne();
+        res.status(200).json({ message: "Diese Anfrage wurde erfolgreich gelöscht" });
+    } catch (error) {
+        console.error("Fehler beim Löschen der Anfrage durch Admin:", error);
+        res.status(500).json({ message: "Die Verkaufsanfrage konnte nicht gelöscht werden" });
+    }
+};
 
 
-
-module.exports = { createSellRequest, getSellRequests, updateSellRequest, deleteSellRequest, getAllSellRequests, updateSellRequestStatus };
+module.exports = { createSellRequest, getSellRequests, 
+    updateSellRequest, deleteSellRequest, 
+    getAllSellRequests, updateSellRequestStatus, 
+    deleteSellRequestByAdmin };

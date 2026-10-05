@@ -14,6 +14,7 @@ function SellRequest() {
         desiredPrice: "",
         phone: "",
         email: "",
+        additionalInfo: "",
         images: []
     });
     
@@ -46,6 +47,7 @@ function SellRequest() {
             data.append("desiredPrice", formData.desiredPrice);
             data.append("phone", formData.phone);
             data.append("email", formData.email);
+            data.append("additionalInfo", formData.additionalInfo);
 
             formData.images.forEach((image) => {
                 data.append(`images`, image);
@@ -67,6 +69,7 @@ function SellRequest() {
                 desiredPrice: "",
                 phone: "",
                 email:"",
+                additionalInfo: "",
                 images: []
             });
         } catch (error) {
@@ -131,6 +134,17 @@ function SellRequest() {
                     onChange={handleChange}
                     required
                 />
+                <div>
+                    <label>Zusätzliche Informationen (optional):</label>
+                    <textarea
+                        name="additionalInfo"
+                        placeholder="Weitere Informationen zu Ihrem Fahrzeug"
+                        value={formData.additionalInfo}
+                        onChange={handleChange}
+                        rows={4}
+                    />
+                </div>
+
                 <label>Bilder des Fahrzeugs:</label>
                 <input
                     type="file"
