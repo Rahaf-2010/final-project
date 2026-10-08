@@ -11,6 +11,8 @@ import Navbar from "./components/Navbar";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminCars from "./pages/AdminCars";
 import AdminSellRequests from "./pages/AdminSellRequest";
+import AdminReviews from "./pages/AdminReviews";
+
 
 
 function ProtectedRoute({ children }) {
@@ -36,7 +38,8 @@ function App() {
         <Route path="/meine-anfragen" element={<ProtectedRoute><MeineAnfragen/></ProtectedRoute>} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard/></ProtectedRoute>} />
         <Route path="/admin/cars" element={<ProtectedRoute><AdminCars/></ProtectedRoute>} />
-        <Route path="/admin/sell-requests" element={<ProtectedRoute><AdminSellRequests/></ProtectedRoute>} />
+        <Route path="/admin/sell-requests" element={<ProtectedRoute><AdminSellRequests/></ProtectedRoute>} /> 
+        <Route path="/admin/reviews" element={<ProtectedRoute><AdminReviews/></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

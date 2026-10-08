@@ -17,7 +17,7 @@ function AdminDashboard() {
 
             <button 
                 type="button"
-                onClick={() => navigate("/admin/users")}>Bewertungen
+                onClick={() => navigate("/admin/reviews")}>Bewertungen
             </button>
         </div>
     );
