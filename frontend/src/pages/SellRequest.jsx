@@ -1,10 +1,12 @@
 import {useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 import api from "../services/api";
 
 function SellRequest() {
 
-    
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
     const [message, setMessage] = useState("");
     const [formData, setFormData] = useState({
         vehicleType: "",
@@ -37,8 +39,6 @@ function SellRequest() {
         setMessage("");
 
         try{
-            const token = localStorage.getItem("token");
-
             const data = new FormData();
             data.append("vehicleType", formData.vehicleType);
             data.append("brandModel", formData.brandModel);
@@ -82,6 +82,14 @@ function SellRequest() {
     return (
         <div >
             <h1>Auto verkaufen</h1>
+            {!token ?(
+                <div>
+                    <p>Bitte melden Sie sich an, um eine Verkaufsanfrage zu stellen.</p>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/login")}>Jetzt Anmeldung</button>
+                </div>
+            ) : (
             <form onSubmit= {handleSubmit}>
                 <input
                     type="text"
@@ -155,6 +163,7 @@ function SellRequest() {
                 />
                 <button type="submit">Anfrage senden</button>
             </form>
+            )}
             {message && <p>{message}</p>}
         </div>
     );

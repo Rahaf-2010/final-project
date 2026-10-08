@@ -31,11 +31,11 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/" element={<Home />} />
-        <Route path="/sell-request" element={<ProtectedRoute><SellRequest/></ProtectedRoute>} />
+        <Route path="/sell-request" element={<SellRequest/>} />
         <Route path="/cars" element={<Cars/>} />
         <Route path="/cars/:id" element={<CarDetails/>} />
         <Route path="/about-us" element={<AboutUs/>} />
-        <Route path="/meine-anfragen" element={<ProtectedRoute><MeineAnfragen/></ProtectedRoute>} />
+        <Route path="/meine-anfragen" element={<MeineAnfragen/>} />
         <Route path="/admin" element={<ProtectedRoute><AdminDashboard/></ProtectedRoute>} />
         <Route path="/admin/cars" element={<ProtectedRoute><AdminCars/></ProtectedRoute>} />
         <Route path="/admin/sell-requests" element={<ProtectedRoute><AdminSellRequests/></ProtectedRoute>} /> 

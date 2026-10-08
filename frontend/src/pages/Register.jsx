@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useNavigate} from "react-router-dom";
 import api from "../services/api";
+import {Eye, EyeOff} from "lucide-react";
 
 
 function Register() {
@@ -18,6 +19,14 @@ function Register() {
 
     const [message, setMessage] = useState("");
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const passwordIsValid = formData.password.length >= 8 &&
+        /[A-Z]/.test(formData.password) &&
+        /[a-z]/.test(formData.password) &&
+        /[0-9]/.test(formData.password) &&
+        /[^A-Za-z0-9]/.test(formData.password);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -28,6 +37,11 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setMessage("");
+
+        if (!passwordIsValid) {
+            setMessage("Das Passwort muss mindestens 8 Zeichen lang sein und Großbuchstaben, Kleinbuchstaben, Zahlen sowie Sonderzeichen enthalten.");
+            return;
+        }
         try {
             const userData = {
                 name: formData.name,
@@ -96,13 +110,43 @@ function Register() {
                     value={formData.email}
                     onChange={handleChange}
                 />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Passwort"
-                    value={formData.password}
-                    onChange={handleChange}
-                />
+                <div style={{ position: "relative", display: "inline-block" }}>
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        placeholder="Passwort"
+                        value={formData.password}
+                        onChange={handleChange}
+                        style={{
+                            paddingRight: "40px"
+                        }}
+                    />
+
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                            position: "absolute",
+                            right: "10px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            border: "none",
+                            background: "none",
+                            padding: 0,
+                            margin: 0,
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                </div>
+                <p>
+                    Das Passwort muss mindestens 8 Zeichen lang sein und Großbuchstaben, 
+                    Kleinbuchstaben, Zahlen sowie Sonderzeichen enthalten.
+                </p>
                 <button type="submit">Registrieren</button>
             </form>
 

@@ -10,6 +10,17 @@ const registerUser = async (req, res) => {
         if (!name || !surname || !address || !email || !phone || !password) {
         return res.status(400).json({ message: 'Bitte füllen Sie alle Felder aus' });
     }
+
+    const passwordIsValid = password.length >= 8 &&
+        /[A-Z]/.test(password) &&
+        /[a-z]/.test(password) &&
+        /[0-9]/.test(password) &&
+        /[^A-Za-z0-9]/.test(password);
+
+    if (!passwordIsValid) {
+        return res.status(400).json({ 
+            message: 'Das Passwort muss mindestens 8 Zeichen enthalten: mindestens einen Großbuchstaben (A-Z), einen Kleinbuchstaben (a-z), eine Zahl (0-9) und ein Sonderzeichen (z. B. !, @, #, $).' });
+    }
     
 
     const existingUser = await User.findOne({ email });

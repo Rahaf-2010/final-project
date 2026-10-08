@@ -1,7 +1,11 @@
 import {useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 const MeineAnfragen = () => {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+
     const [requests, setRequests] = useState([]);
     const [message, setMessage] = useState("");
     const [editingRequest, setEditingRequest] = useState(null);
@@ -9,6 +13,9 @@ const MeineAnfragen = () => {
 
     useEffect(() => {
         const fetchRequests = async () => {
+            if (!token) {
+                return;
+            }
             try {
                 const token = localStorage.getItem("token");
                 const response = await api.get("/sell-requests", {
@@ -25,7 +32,7 @@ const MeineAnfragen = () => {
         };
 
         fetchRequests();
-    }, []);
+    }, [token]);
 
     const handleUpdate = async (e) =>{
         e.preventDefault();
@@ -91,7 +98,17 @@ const MeineAnfragen = () => {
     return (
         <div>
             <h1>Meine Anfragen</h1>
-            {message && <p>{message}</p>}
+
+            {!token ? (
+                <div>
+                    <p>Bitte melden Sie sich an, um Ihre Anfragen einzusehen.</p>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/login")}>Jetzt Anmeldung</button>
+                </div>
+            ) : (
+                <>
+                    {message && <p>{message}</p>}
 
             {requests.length === 0 && !message && (
                 <p>Keine Anfragen vorhanden.</p>
@@ -225,13 +242,11 @@ const MeineAnfragen = () => {
                             </button>
                     </form>
                 </div>
-                    )}
+                )}
+            </>
+            )}
         </div>
 );
 };
 
 export default MeineAnfragen;
-
-
-
-

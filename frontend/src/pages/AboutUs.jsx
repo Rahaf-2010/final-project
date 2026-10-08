@@ -159,6 +159,7 @@ const AboutUs = () => {
                             Haben Sie eine Beschwerde oder einen Verbesserungsvorschlag?
                             Wir freuen uns auf Ihr Feedback!
                         </p>
+                    {currentUser ? (
                         <div>
                             <h3>Ihre Bewertung</h3> 
 
@@ -185,6 +186,10 @@ const AboutUs = () => {
                             <br/>
                             <button type="button" onClick={handleSubmit}>Absenden</button>
                             {reviewMessage && <p>{reviewMessage}</p>}
+                        </div>
+                    ) : (
+                        <p>Bitte melden Sie sich an, um eine Bewertung abzugeben.</p>
+                    )}
 
                             <h3>Bewertungen unserer Kunden</h3>
 
@@ -283,7 +288,7 @@ const AboutUs = () => {
 
                 </div>
             </div>
-        </div>
+        
     );
 };
 
