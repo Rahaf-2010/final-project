@@ -1,6 +1,7 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "./MeineAnfragen.css";
 
 const MeineAnfragen = () => {
     const navigate = useNavigate();
@@ -13,64 +14,81 @@ const MeineAnfragen = () => {
 
     useEffect(() => {
         const fetchRequests = async () => {
-            if (!token) {
-                return;
-            }
+            if (!token) return;
+
             try {
-                const token = localStorage.getItem("token");
                 const response = await api.get("/sell-requests", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+
                 setRequests(response.data);
             } catch (error) {
                 console.error("Fehler beim Abrufen der Anfragen.", error);
-
-                setMessage(error.response?.data?.message || "Fehler beim Abrufen der Anfragen.");
+                setMessage(
+                    error.response?.data?.message ||
+                    "Fehler beim Abrufen der Anfragen."
+                );
             }
         };
 
         fetchRequests();
     }, [token]);
 
-    const handleUpdate = async (e) =>{
+    const handleUpdate = async (e) => {
         e.preventDefault();
+        if (!editingRequest) return;
 
-        try{
-            const token = localStorage.getItem("token");
+        try {
             const formData = new FormData();
 
-            formData.append("vehicleType", editingRequest.vehicleType);
-            formData.append("brandModel", editingRequest.brandModel);
-            formData.append("year", editingRequest.year);
-            formData.append("mileage", editingRequest.mileage);
-            formData.append("desiredPrice", editingRequest.desiredPrice);
-            formData.append("phone", editingRequest.phone);
-            formData.append("email", editingRequest.email);
-            formData.append("additionalInfo", editingRequest.additionalInfo || "");
+            formData.append("vehicleType", editingRequest.vehicleType || "");
+            formData.append("brandModel", editingRequest.brandModel || "");
+            formData.append("year", editingRequest.year ?? "");
+            formData.append("mileage", editingRequest.mileage ?? "");
+            formData.append("desiredPrice", editingRequest.desiredPrice ?? "");
+            formData.append("phone", editingRequest.phone || "");
+            formData.append("email", editingRequest.email || "");
+            formData.append(
+                "additionalInfo",
+                editingRequest.additionalInfo || ""
+            );
+
             editImages.forEach((image) => {
                 formData.append("images", image);
             });
 
-            const response = await api.put(`/sell-requests/${editingRequest._id}`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await api.put(
+                `/sell-requests/${editingRequest._id}`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            );
 
             setRequests((prevRequests) =>
                 prevRequests.map((request) =>
-                    request._id === editingRequest._id ? response.data.request : request
+                    request._id === editingRequest._id
+                        ? response.data.request
+                        : request
                 )
             );
+
             setEditingRequest(null);
             setEditImages([]);
-            setMessage(response.data.message || "Verkaufsanfrage erfolgreich aktualisiert.");
-        }catch (error) {
+            setMessage(
+                response.data.message ||
+                "Verkaufsanfrage erfolgreich aktualisiert."
+            );
+        } catch (error) {
             console.error("Fehler beim Aktualisieren der Anfrage.", error);
-
-            setMessage(error.response?.data?.message || "Die Anfrage konnte nicht aktualisiert werden.");
+            setMessage(
+                error.response?.data?.message ||
+                "Die Anfrage konnte nicht aktualisiert werden."
+            );
         }
     };
 
@@ -78,175 +96,400 @@ const MeineAnfragen = () => {
         if (!window.confirm("Möchten Sie diese Anfrage wirklich löschen?")) {
             return;
         }
+
         try {
-            const token = localStorage.getItem("token");
             const response = await api.delete(`/sell-requests/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             });
 
-            setRequests((prevRequests) => prevRequests.filter((request) => request._id !== id));
-            setMessage(response.data.message || "Verkaufsanfrage erfolgreich gelöscht.");
+            setRequests((prevRequests) =>
+                prevRequests.filter((request) => request._id !== id)
+            );
+
+            if (editingRequest?._id === id) {
+                setEditingRequest(null);
+                setEditImages([]);
+            }
+
+            setMessage(
+                response.data.message ||
+                "Verkaufsanfrage erfolgreich gelöscht."
+            );
         } catch (error) {
             console.error("Fehler beim Löschen der Anfrage.", error);
-
-            setMessage(error.response?.data?.message || "Die Anfrage konnte nicht gelöscht werden.");
+            setMessage(
+                error.response?.data?.message ||
+                "Die Anfrage konnte nicht gelöscht werden."
+            );
         }
     };
 
+    const startEditing = (request) => {
+        setEditingRequest({ ...request });
+        setEditImages([]);
+        setMessage("");
+    };
+
+    const cancelEditing = () => {
+        setEditingRequest(null);
+        setEditImages([]);
+    };
+
     return (
-        <div>
+        <div className="meine-anfragen-page">
             <h1>Meine Anfragen</h1>
 
             {!token ? (
-                <div>
-                    <p>Bitte melden Sie sich an, um Ihre Anfragen einzusehen.</p>
+                <div className="requests-login-prompt">
+                    <p>
+                        Bitte melden Sie sich an, um Ihre Anfragen einzusehen.
+                    </p>
                     <button
                         type="button"
-                        onClick={() => navigate("/login")}>Jetzt Anmeldung</button>
+                        onClick={() => navigate("/login")}
+                    >
+                        Jetzt anmelden
+                    </button>
                 </div>
             ) : (
                 <>
-                    {message && <p>{message}</p>}
+                    {message && (
+                        <p className="requests-message" role="status">
+                            {message}
+                        </p>
+                    )}
 
-            {requests.length === 0 && !message && (
-                <p>Keine Anfragen vorhanden.</p>
-            )}
-                <ul>
-                    {requests.map((request) => (
-                        <li key={request._id}>
-                            <h2>{request.brandModel}</h2>
+                    {requests.length === 0 && !message && (
+                        <p className="requests-empty">
+                            Sie haben noch keine Anfragen gestellt.
+                        </p>
+                    )}
 
-                            <p>Fahrzeug: {request.vehicleType}</p>
-                            <p>Baujahr: {request.year}</p>
-                            <p>Kilometerstand: {request.mileage}</p>
-                            <p>Gewünschter Preis: {request.desiredPrice} €</p>
-                            <p>Telefonnummer: {request.phone}</p>
-                            <p>E-Mail-Adresse: {request.email}</p>
-                            <p>Status: <strong>{request.status}</strong></p>
+                    <ul className="requests-list">
+                        {requests.map((request) => {
+                            const isEditing =
+                                editingRequest?._id === request._id;
 
-                            {request.additionalInfo && (
-                                <p>Zusätzliche Informationen: {request.additionalInfo}</p>
-                            )}
+                            return (
+                                <li
+                                    key={request._id}
+                                    className="request-card"
+                                >
+                                    {isEditing ? (
+                                        <>
+                                            <div className="request-card-header">
+                                                <div>
+                                                    <span className="request-eyebrow">
+                                                        FAHRZEUGANFRAGE
+                                                    </span>
+                                                    <h2>Anfrage bearbeiten</h2>
+                                                </div>
 
-                            
-                                <button 
-                                    type="button"
-                                    onClick={() => {
-                                        setEditingRequest({ ...request });
-                                        setEditImages([]);
-                                    }}
-                                >Bearbeiten</button>
+                                                <span className="request-status">
+                                                    {request.status}
+                                                </span>
+                                            </div>
 
-                                <button 
-                                    type="button"
-                                    onClick={() => handleDelete(request._id)}
-                                >Löschen</button>
+                                            {request.images?.length > 0 && (
+                                                <div className="request-images">
+                                                    <h3>Aktuelle Fahrzeugbilder</h3>
 
-                            {request.images?.length >0 && (
-                                <div>
-                                    {request.images.map((image, index) => (
-                                        <img key={index} 
-                                        src={`http://localhost:5000${image}`} 
-                                        alt={request.brandModel} 
-                                        style={{maxWidth: "200px", marginRight: "10px"}} />
-                                    ))}
-                                </div>  
-                            )}
-                        </li>
-                    ))}
-                </ul>
-                {editingRequest && (
-                    <div>
-                        <h2>Verkaufsanfrage bearbeiten</h2>
+                                                    <div className="request-images-grid">
+                                                        {request.images.map(
+                                                            (image, index) => (
+                                                                <img
+                                                                    key={index}
+                                                                    src={`http://localhost:5000${image}`}
+                                                                    alt={`${request.brandModel} – Bild ${index + 1}`}
+                                                                />
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
 
-                        {editingRequest.images?.length > 0 && (
-                            <div>
-                                <h3>Aktuelle Bilder</h3>
+                                            <form
+                                                className="request-edit-form"
+                                                onSubmit={handleUpdate}
+                                            >
+                                                <label>
+                                                    Fahrzeugtyp
+                                                    <input
+                                                        type="text"
+                                                        value={editingRequest.vehicleType || ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                vehicleType: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Fahrzeugtyp"
+                                                    />
+                                                </label>
 
-                                {editingRequest.images.map((image, index) => (
-                                        <img key={index} 
-                                        src={`http://localhost:5000${image}`} 
-                                        alt={editingRequest.brandModel} 
-                                        style={{maxWidth: "200px", marginRight: "10px"}} />
-                                    ))
-                                }
-                            </div>
-                        )}
+                                                <label>
+                                                    Marke / Modell
+                                                    <input
+                                                        type="text"
+                                                        value={editingRequest.brandModel || ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                brandModel: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Marke / Modell"
+                                                        required
+                                                    />
+                                                </label>
 
-                    <form onSubmit={handleUpdate}>
+                                                <label>
+                                                    Baujahr
+                                                    <input
+                                                        type="number"
+                                                        value={editingRequest.year ?? ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                year: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Baujahr"
+                                                    />
+                                                </label>
 
-                        <input
-                            type="text"
-                            value={editingRequest.vehicleType}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, vehicleType: e.target.value })}
-                            placeholder="Fahrzeugtyp"
-                        />
-                        <input
-                            type="text"
-                            value={editingRequest.brandModel}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, brandModel: e.target.value })}
-                            placeholder="Marke/Modell"
-                        />
-                        <input
-                            type="number"
-                            value={editingRequest.year}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, year: e.target.value })}
-                            placeholder="Baujahr"
-                        />
-                        <input
-                            type="number"
-                            value={editingRequest.mileage}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, mileage: e.target.value })}
-                            placeholder="Kilometerstand"
-                        />
-                        <input
-                            type="number"
-                            value={editingRequest.desiredPrice}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, desiredPrice: e.target.value })}
-                            placeholder="Gewünschter Preis"
-                        />
-                        <input
-                            type="text"
-                            value={editingRequest.phone}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, phone: e.target.value })}
-                            placeholder="Telefonnummer"
-                        />
-                        <input
-                            type="email"
-                            value={editingRequest.email}
-                            onChange={(e) => setEditingRequest({ ...editingRequest, email: e.target.value })}
-                            placeholder="E-Mail"
-                        />
-                        <div>
-                            <label>Zusätzliche Informationen (optional):</label>
-                            <textarea
-                                value={editingRequest.additionalInfo || ""}
-                                onChange={(e) => setEditingRequest({ ...editingRequest, additionalInfo: e.target.value })}
-                                placeholder="Weitere Informationen zu Ihrem Fahrzeug"
-                                rows={4}
-                            />
-                        </div>
-                        <input
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            onChange={(e) => setEditImages(Array.from(e.target.files))}
-                            />
-                            <button type="submit">Änderungen speichern</button>
-                            <button type="button" onClick={() => {
-                                setEditImages([]);
-                                setEditingRequest(null);
-                            }}>Abbrechen
-                            </button>
-                    </form>
-                </div>
-                )}
-            </>
+                                                <label>
+                                                    Kilometerstand
+                                                    <input
+                                                        type="number"
+                                                        value={editingRequest.mileage ?? ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                mileage: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Kilometerstand"
+                                                    />
+                                                </label>
+
+                                                <label>
+                                                    Gewünschter Preis (€)
+                                                    <input
+                                                        type="number"
+                                                        value={editingRequest.desiredPrice ?? ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                desiredPrice: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Gewünschter Preis"
+                                                    />
+                                                </label>
+
+                                                <label>
+                                                    Telefonnummer
+                                                    <input
+                                                        type="tel"
+                                                        value={editingRequest.phone || ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                phone: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Telefonnummer"
+                                                        required
+                                                    />
+                                                </label>
+
+                                                <label>
+                                                    E-Mail-Adresse
+                                                    <input
+                                                        type="email"
+                                                        value={editingRequest.email || ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                email: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="E-Mail-Adresse"
+                                                        required
+                                                    />
+                                                </label>
+
+                                                <label className="request-textarea-label">
+                                                    Zusätzliche Informationen (optional)
+                                                    <textarea
+                                                        value={editingRequest.additionalInfo || ""}
+                                                        onChange={(e) =>
+                                                            setEditingRequest({
+                                                                ...editingRequest,
+                                                                additionalInfo: e.target.value,
+                                                            })
+                                                        }
+                                                        placeholder="Weitere Informationen zu Ihrem Fahrzeug"
+                                                        rows={4}
+                                                    />
+                                                </label>
+
+                                                <label className="request-file-label">
+                                                    Neue Bilder hinzufügen
+                                                    <input
+                                                        type="file"
+                                                        multiple
+                                                        accept="image/*"
+                                                        onChange={(e) =>
+                                                            setEditImages(
+                                                                Array.from(e.target.files || [])
+                                                            )
+                                                        }
+                                                    />
+                                                </label>
+
+                                                {editImages.length > 0 && (
+                                                    <p className="request-selected-files">
+                                                        {editImages.length} neue Bild(er) ausgewählt
+                                                    </p>
+                                                )}
+
+                                                <div className="request-actions">
+                                                    <button
+                                                        type="submit"
+                                                        className="request-edit-button"
+                                                    >
+                                                        Änderungen speichern
+                                                    </button>
+
+                                                    <button
+                                                        type="button"
+                                                        className="request-delete-button"
+                                                        onClick={cancelEditing}
+                                                    >
+                                                        Abbrechen
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="request-card-header">
+                                                <div>
+                                                    <span className="request-eyebrow">
+                                                        FAHRZEUGANFRAGE
+                                                    </span>
+                                                    <h2>{request.brandModel}</h2>
+                                                </div>
+
+                                                <span className="request-status">
+                                                    {request.status}
+                                                </span>
+                                            </div>
+
+                                            <div className="request-specs">
+                                                <div className="request-spec">
+                                                    <span>Fahrzeugtyp</span>
+                                                    <strong>
+                                                        {request.vehicleType || "Keine Angabe"}
+                                                    </strong>
+                                                </div>
+
+                                                <div className="request-spec">
+                                                    <span>Baujahr</span>
+                                                    <strong>
+                                                        {request.year || "Keine Angabe"}
+                                                    </strong>
+                                                </div>
+
+                                                <div className="request-spec">
+                                                    <span>Kilometerstand</span>
+                                                    <strong>
+                                                        {request.mileage !== "" &&
+                                                        request.mileage != null
+                                                            ? `${Number(request.mileage).toLocaleString("de-DE")} km`
+                                                            : "Keine Angabe"}
+                                                    </strong>
+                                                </div>
+
+                                                <div className="request-spec request-price">
+                                                    <span>Gewünschter Preis</span>
+                                                    <strong>
+                                                        {request.desiredPrice !== "" &&
+                                                        request.desiredPrice != null
+                                                            ? `${Number(request.desiredPrice).toLocaleString("de-DE")} €`
+                                                            : "Kein Preis angegeben"}
+                                                    </strong>
+                                                </div>
+                                            </div>
+
+                                            <div className="request-contact">
+                                                <h3>Kontaktdaten</h3>
+                                                <p>
+                                                    <span>Telefon</span>
+                                                    {request.phone}
+                                                </p>
+                                                <p>
+                                                    <span>E-Mail</span>
+                                                    {request.email}
+                                                </p>
+                                            </div>
+
+                                            {request.additionalInfo && (
+                                                <div className="request-description">
+                                                    <h3>Zusätzliche Informationen</h3>
+                                                    <p>{request.additionalInfo}</p>
+                                                </div>
+                                            )}
+
+                                            <div className="request-actions">
+                                                <button
+                                                    type="button"
+                                                    className="request-edit-button"
+                                                    onClick={() => startEditing(request)}
+                                                >
+                                                    Bearbeiten
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="request-delete-button"
+                                                    onClick={() => handleDelete(request._id)}
+                                                >
+                                                    Löschen
+                                                </button>
+                                            </div>
+
+                                            {request.images?.length > 0 && (
+                                                <div className="request-images">
+                                                    <h3>Fahrzeugbilder</h3>
+
+                                                    <div className="request-images-grid">
+                                                        {request.images.map(
+                                                            (image, index) => (
+                                                                <img
+                                                                    key={index}
+                                                                    src={`http://localhost:5000${image}`}
+                                                                    alt={`${request.brandModel} – Bild ${index + 1}`}
+                                                                />
+                                                            )
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </>
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </>
             )}
         </div>
-);
+    );
 };
 
 export default MeineAnfragen;

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import "./SellRequest.css";
 
 import api from "../services/api";
 
@@ -80,8 +81,17 @@ function SellRequest() {
     };
 
     return (
-        <div >
+        <div className="sell-request-page">
             <h1>Auto verkaufen</h1>
+            <div className="sell-request-intro">
+                <h2>Verkaufen Sie Ihr Fahrzeug</h2>
+                <p>
+                    Senden Sie uns die Informationen zu Ihrem Fahrzeug.
+                    Wir melden uns schnellstmöglich bei Ihnen.
+                    Bitte verfolgen Sie den Status Ihrer Anfrage im Bereich
+                    „Meine Anfragen“.
+                </p>
+            </div>
             {!token ?(
                 <div>
                     <p>Bitte melden Sie sich an, um eine Verkaufsanfrage zu stellen.</p>
@@ -90,7 +100,7 @@ function SellRequest() {
                         onClick={() => navigate("/login")}>Jetzt Anmeldung</button>
                 </div>
             ) : (
-            <form onSubmit= {handleSubmit}>
+            <form className="sell-request-card" onSubmit= {handleSubmit}>
                 <input
                     type="text"
                     name="vehicleType"

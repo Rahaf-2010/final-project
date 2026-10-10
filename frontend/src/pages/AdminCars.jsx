@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./AdminCars.css";
+import { Trash2, Pencil, ChevronLeft, ChevronRight, CarFront } from "lucide-react";
 import api from "../services/api";
 
 function AdminCars() {
@@ -7,6 +10,10 @@ function AdminCars() {
     const [cars, setCars] = useState([]);
     const [editingCar, setEditingCar] = useState(null);
     const [editImages, setEditImages] = useState([]);
+    const [galleryIndexes, setGalleryIndexes] = useState({});
+    const [lightbox, setLightbox] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDashboard = async () => {
@@ -163,8 +170,23 @@ function AdminCars() {
         }
     };
     return (
-        <div>
-            <h1>Admin Dashboard</h1>
+        <main className="admin-cars-page">
+            <header className="admin-cars-header">
+
+                <div className="admin-cars-header-text">
+                    <span className="admin-cars-eyebrow">
+                        ISSA AUTOMOBILE
+                    </span>
+
+                    <h1>Fahrzeuge verwalten</h1>
+                    <p>Erfassen und verwalten Sie Ihre Fahrzeuge.</p>
+                </div>
+
+                <div className="admin-cars-counter">
+                    <span>Fahrzeuge gesamt</span>
+                    <strong>{cars.length}</strong>
+                </div>
+            </header>
             {loading ? (
                 <p>Lädt...</p>
             ) : (
@@ -242,144 +264,306 @@ function AdminCars() {
             {cars.length === 0 ? (
                 <p>Keine Fahrzeuge verfügbar.</p>
             ) : (
-                <ul>
-                    {cars.map((car) => (
-                        <li key={car._id}>
-                            <h3>{car.brandModel}</h3>
-                            <p>Angebotsnummer: {car.offerNumber}</p>
-                            <p>Fahrzeugtyp: {car.vehicleType}</p>
-                            <p>Baujahr: {car.year}</p>
-                            <p>Kilometerstand: {car.mileage} km</p>
-                            <p>Preis: {car.price} €</p>
-                            <p>Farbe: {car.color}</p>
-                            <p>{car.description}</p>
+                <div className="admin-cars-list">
+                    {cars.map((car) => {
+                        const images = car.images || [];
+                        const activeIndex = Math.min(
+                            galleryIndexes[car._id] || 0,
+                            Math.max(images.length - 1, 0)
+                        );
 
-                            {car.images && car.images.length > 0 && (
-                                <div>
-                                    {car.images.map((image, index) => (
-                                        <img key={index} 
-                                        src={`http://localhost:5000${image}`} 
-                                        alt={car.brandModel} 
-                                        style={{ maxWidth: "200px", margin: "5px" }} />
-                                    ))}
+                        const changeImage = (nextIndex) => {
+                            setGalleryIndexes((previous) => ({
+                                ...previous,
+                                [car._id]: (nextIndex + images.length) % images.length,
+                            }));
+                        };
+
+                    return (
+                        <article className="admin-car-card" key={car._id}>
+                            <div className="admin-car-gallery">
+                                {images.length > 0 ? (
+                                    <>
+                                        <button
+                                            type="button"
+                                            className="admin-car-main-image"
+                                            onClick={() =>
+                                                setLightbox({
+                                                    carId: car._id,
+                                                    index: activeIndex,
+                                                })
+                                            }
+                                            aria-label="Bild vergrößern"
+                                        >
+                                            <img
+                                                src={`http://localhost:5000${images[activeIndex]}`}
+                                                alt={car.brandModel}
+                                            />
+                                        </button>
+
+                                        <span className="admin-car-image-count">
+                                            {activeIndex + 1} / {images.length}
+                                        </span>
+
+                                        {images.length > 1 && (
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    className="admin-car-gallery-arrow prev"
+                                                    onClick={() => changeImage(activeIndex - 1)}
+                                                    aria-label="Vorheriges Bild"
+                                                >
+                                                    <ChevronLeft size={21} />
+                                                </button>
+
+                                                <button
+                                                    type="button"
+                                                    className="admin-car-gallery-arrow next"
+                                                    onClick={() => changeImage(activeIndex + 1)}
+                                                    aria-label="Nächstes Bild"
+                                                >
+                                                    <ChevronRight size={21} />
+                                                </button>
+
+                                                <div className="admin-car-thumbnails">
+                                                    {images.map((image, index) => (
+                                                        <button
+                                                            type="button"
+                                                            key={`${image}-${index}`}
+                                                            className={`admin-car-thumbnail ${
+                                                                index === activeIndex ? "active" : ""
+                                                            }`}
+                                                            onClick={() => changeImage(index)}
+                                                            aria-label={`Bild ${index + 1} anzeigen`}
+                                                        >
+                                                            <img
+                                                                src={`http://localhost:5000${image}`}
+                                                                alt=""
+                                                            />
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="admin-car-no-image">
+                                        <CarFront size={42} />
+                                        <span>Kein Bild verfügbar</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="admin-car-content">
+                                <span className="admin-car-number">
+                                    ANGEBOTSNUMMER: {car.offerNumber}
+                                </span>
+
+                                <h3>{car.brandModel}</h3>
+
+                                <strong className="admin-car-price">
+                                    {Number(car.price).toLocaleString("de-DE")} €
+                                </strong>
+
+                                <div className="admin-car-specs">
+                                    <span>Typ: {car.vehicleType}</span>
+                                    <span>Baujahr: {car.year}</span>
+                                    <span>
+                                        Kilometer: {Number(car.mileage).toLocaleString("de-DE")} km
+                                    </span>
+                                    <span>Farbe: {car.color || "–"}</span>
                                 </div>
-                            )}
 
-                            <button
-                            type="button"
-                            onClick={() => {
-                                setEditingCar({...car});
-                                setEditImages(car.images || []);
-                            }}>Bearbeiten
-                            </button>
+                                <div className="admin-car-actions">
+                                    <button
+                                        type="button"
+                                        className="admin-car-details"
+                                        onClick={() => navigate(`/cars/${car._id}`)}
+                                    >
+                                        Details Ansehen
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="admin-car-edit"
+                                        onClick={() => {
+                                            setEditingCar({ ...car });
+                                            setEditImages([]);
+                                        }}
+                                    >
+                                        <Pencil size={16} />
+                                        Bearbeiten
+                                    </button>
 
-                            <button
-                                type="button"
-                                onClick={() => handleDeleteCar(car._id)}
+                                    <button
+                                        type="button"
+                                        className="admin-car-delete"
+                                        onClick={() => handleDeleteCar(car._id)}
+                                    >
+                                        <Trash2 size={16} />
+                                        Löschen
+                                    </button>
+                                </div>
+
+                    {editingCar?._id === car._id && (
+                        <div className="admin-car-edit-panel">
+                            <h3>Fahrzeug bearbeiten</h3>
+
+                            <form
+                                className="admin-car-edit-form"
+                                onSubmit={handleUpdateCar}
                             >
-                                Löschen
-                            </button>
-                        </li>
-                    ))}
-                </ul>
-            )}
+                                {[
+                                    ["vehicleType", "Fahrzeugtyp", "text"],
+                                    ["brandModel", "Marke / Modell", "text"],
+                                    ["year", "Baujahr", "number"],
+                                    ["mileage", "Kilometerstand", "number"],
+                                    ["price", "Preis (€)", "number"],
+                                    ["color", "Farbe", "text"],
+                                ].map(([name, label, type]) => (
+                                    <div className="admin-cars-field" key={name}>
+                                        <label>{label}</label>
+                                        <input
+                                            type={type}
+                                            value={editingCar[name] ?? ""}
+                                            onChange={(e) =>
+                                                setEditingCar({
+                                                    ...editingCar,
+                                                    [name]: e.target.value,
+                                                })
+                                            }
+                                            required
+                                        />
+                                    </div>
+                                ))}
 
-            {editingCar && (
-                <div>
-                    <h2>Fahrzeug bearbeiten</h2>
+                                <div className="admin-cars-field">
+                                    <label>Beschreibung</label>
+                                    <textarea
+                                        value={editingCar.description || ""}
+                                        onChange={(e) =>
+                                            setEditingCar({
+                                                ...editingCar,
+                                                description: e.target.value,
+                                            })
+                                        }
+                                        required
+                                    />
+                                </div>
 
-                    <form onSubmit={handleUpdateCar}>
+                                <div className="admin-cars-field">
+                                    <label>Neue Bilder auswählen (optional)</label>
+                                    <input
+                                        type="file"
+                                        multiple
+                                        accept="image/*"
+                                        onChange={(e) =>
+                                            setEditImages(Array.from(e.target.files || []))
+                                        }
+                                    />
+                                </div>
 
-                        <input
-                            type="text"
-                            value={editingCar.vehicleType}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, vehicleType: e.target.value })
-                            }
-                            placeholder="Fahrzeugtyp"
-                            required
-                            />
+                                <div className="admin-car-edit-actions">
+                                    <button
+                                        className="admin-cars-button"
+                                        type="submit"
+                                    >
+                                        Änderungen speichern
+                                    </button>
 
-                        <input
-                            type="text"
-                            value={editingCar.brandModel}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, brandModel: e.target.value })
-                            }
-                            placeholder="Marke / Modell"
-                            required
-                        />
-
-                        <input
-                            type="number"
-                            value={editingCar.year}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, year: e.target.value })
-                            }
-                            placeholder="Baujahr"
-                            required
-                        />
-
-                        <input
-                            type="number"
-                            value={editingCar.mileage}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, mileage: e.target.value })
-                            }
-                            placeholder="Kilometerstand"
-                            required
-                        />
-
-                        <input
-                            type="number"
-                            value={editingCar.price}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, price: e.target.value })
-                            }
-                            placeholder="Preis"
-                            required
-                        />
-
-                        <input
-                            type="text"
-                            value={editingCar.color}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, color: e.target.value })
-                            }
-                            placeholder="Farbe"
-                            required
-                        />  
-
-                        <textarea
-                            value={editingCar.description}
-                            onChange={(e) =>
-                                setEditingCar({ ...editingCar, description: e.target.value })
-                            }
-                            placeholder="Beschreibung"
-                            required
-                        />
-
-                        <input
-                            type="file"
-                            multiple
-                            accept="image/*"
-                            onChange={(e) =>
-                                setEditImages(Array.from(e.target.files))
-                            }
-                        />
-
-                        <button type="submit">Änderungen speichern</button>
-
-                        <button type="button" onClick={() => {
-                            setEditingCar(null);
-                            setEditImages([]);
-                        }}>Abbrechen</button>
-
-                    </form>
+                                    <button
+                                        className="admin-car-cancel"
+                                        type="button"
+                                        onClick={() => {
+                                            setEditingCar(null);
+                                            setEditImages([]);
+                                        }}
+                                    >
+                                        Abbrechen
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    )}
                 </div>
+            </article>
+        );
+    })}
+</div>
             )}
+
             {message && <p>{message}</p>}
+
+            {lightbox && (() => {
+    const selectedCar = cars.find((car) => car._id === lightbox.carId);
+    const images = selectedCar?.images || [];
+
+    if (!selectedCar || images.length === 0) return null;
+
+    const index = lightbox.index;
+
+    const moveLightbox = (direction) => {
+        setLightbox({
+            carId: selectedCar._id,
+            index: (index + direction + images.length) % images.length,
+        });
+    };
+
+    return (
+        <div
+            className="admin-car-lightbox"
+            onClick={() => setLightbox(null)}
+            onKeyDown={(e) => {
+                if (e.key === "Escape") setLightbox(null);
+                if (e.key === "ArrowLeft") moveLightbox(-1);
+                if (e.key === "ArrowRight") moveLightbox(1);
+            }}
+        >
+            <button
+                type="button"
+                className="admin-car-lightbox-close"
+                onClick={() => setLightbox(null)}
+                aria-label="Schließen"
+            >
+                ×
+            </button>
+
+            {images.length > 1 && (
+                <button
+                    type="button"
+                    className="admin-car-lightbox-arrow prev"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        moveLightbox(-1);
+                    }}
+                    aria-label="Vorheriges Bild"
+                >
+                    <ChevronLeft size={26} />
+                </button>
+            )}
+
+            <img
+                src={`http://localhost:5000${images[index]}`}
+                alt={selectedCar.brandModel}
+                onClick={(e) => e.stopPropagation()}
+            />
+
+            {images.length > 1 && (
+                <button
+                    type="button"
+                    className="admin-car-lightbox-arrow next"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        moveLightbox(1);
+                    }}
+                    aria-label="Nächstes Bild"
+                >
+                    <ChevronRight size={26} />
+                </button>
+            )}
         </div>
+    );
+})()}
+        </main>
     );
 }
 

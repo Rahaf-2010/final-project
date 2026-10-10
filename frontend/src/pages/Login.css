@@ -1,0 +1,238 @@
+.login-page {
+    width: min(460px, calc(100% - 32px));
+    margin: 70px auto;
+    padding: 40px;
+    border: 1px solid rgba(216, 183, 121, 0.35);
+    border-radius: 22px;
+    background: #FFFFFF;
+    box-shadow: 0 18px 50px rgba(10, 27, 43, 0.12);
+}
+
+.login-page h1 {
+    margin-bottom: 28px;
+    color: #0A1B2B;
+    font-family: "Playfair Display", serif;
+    font-size: 38px;
+    text-align: center;
+}
+
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.login-page form > input,
+.login-page form > div {
+    width: 100%;
+}
+
+.login-page form > div {
+    position: relative;
+}
+
+.login-page form input {
+    width: 100%;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #D9D4CA;
+    border-radius: 9px;
+    background: #FAF7F1;
+}
+
+.login-page form > div input {
+    padding-right: 42px;
+}
+
+.login-page form > div button {
+    position: absolute;
+}
+
+.login-page button {
+    cursor: pointer;
+}
+
+.login-page form button[type="submit"] {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 9px;
+    background: #0A1B2B;
+    color: #F3EBDD;
+    font-weight: 600;
+}
+
+.login-page form button[type="submit"]:hover {
+    background: #152C3B;
+}
+
+.login-page > p {
+    margin-top: 24px;
+    text-align: center;
+    line-height: 1.7;
+}
+
+.login-page > p button {
+    border: none;
+    background: transparent;
+    color: #94743B;
+    font-weight: 600;
+}
+
+.login-page > button {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 14px;
+    border: 1px solid #D8B779;
+    border-radius: 9px;
+    background: transparent;
+    color: #0A1B2B;
+}
+
+.login-page > button:hover {
+    background: #F3EBDD;
+}
+
+.login-page > p:last-child {
+    color: #A33A32;
+}
+
+@media (max-width: 480px) {
+    .login-page {
+        margin: 32px auto;
+        padding: 26px 20px;
+    }
+
+    .login-page h1 {
+        font-size: 30px;
+    }
+}
+
+.login-page form > div {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.login-page form > div input {
+    display: block;
+    width: 100%;
+    padding-right: 44px;
+}
+
+.login-page form > div button[type="button"] {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #0A1B2B;
+    z-index: 2;
+}
+
+/* Clear separation between promise section and footer */
+.issa-promise {
+    position: relative;
+    margin-bottom: 0;
+    padding-bottom: 90px;
+    border-bottom: 1px solid rgba(216, 183, 121, 0.35);
+}
+
+.issa-promise::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90px;
+    height: 3px;
+    background: #D8B779;
+    transform: translateX(-50%);
+}
+
+/* Elegant light separator before footer */
+.issa-home::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 14px;
+    background: #F3EBDD;
+    border-top: 1px solid rgba(216, 183, 121, 0.45);
+}
+
+/* Center the complete Mehr als ein Auto section */
+.issa-promise {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.issa-promise > div {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.issa-promise .issa-eyebrow,
+.issa-promise h2,
+.issa-promise > div > p:last-child {
+    width: 100%;
+    text-align: center;
+}
+
+.issa-promise > div > p:last-child {
+    margin: 20px auto 0;
+}
+
+.auth-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 82px;
+    min-height: 82px;
+    margin: 0;
+    padding: 0 30px;
+    background: #0b1d2a;
+    border-bottom: 1px solid rgba(216, 183, 121, 0.3);
+    box-sizing: border-box;
+}
+
+.auth-logo {
+    border: none;
+    background: transparent;
+    color: #d8b779;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+.auth-logo strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+    .auth-header {
+        height: 68px;
+        min-height: 68px;
+    }
+
+    .auth-logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+}

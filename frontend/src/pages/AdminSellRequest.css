@@ -1,0 +1,572 @@
+/* =========================================
+   ISSA AUTOMOBILE — ADMIN SELL REQUESTS
+   ========================================= */
+.admin-sell-page {
+    --navy: #102b43;
+    --navy-light: #1c405b;
+    --gold: #d7b66c;
+    --gold-light: #f5e8c8;
+    --text: #233443;
+    --muted: #75818b;
+    --border: #e6e2d9;
+    --surface: #ffffff;
+    --background: #f5f4f0;
+    min-height: 100vh;
+    padding: 35px clamp(16px, 4vw, 60px) 65px;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+.admin-sell-page *,
+.admin-sell-page *::before,
+.admin-sell-page *::after {
+    box-sizing: border-box;
+}
+/* Header */
+.admin-sell-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--gold);
+    border-radius: 15px;
+    background: var(--surface);
+    box-shadow: 0 8px 30px #102b430b;
+}
+.admin-sell-header-icon {
+    display: grid;
+    flex: 0 0 58px;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--navy);
+    color: var(--gold-light);
+}
+.admin-sell-eyebrow {
+    color: #9a7938;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.admin-sell-header h1 {
+    margin: 7px 0;
+    color: var(--navy);
+    font: 36px Georgia, serif;
+}
+.admin-sell-header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+.admin-sell-total {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 125px;
+    margin-left: auto;
+    padding: 15px 18px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #fcfbf8;
+    text-align: center;
+}
+.admin-sell-total span {
+    color: var(--muted);
+    font-size: 12px;
+}
+.admin-sell-total strong {
+    color: var(--navy);
+    font-size: 28px;
+}
+/* Feedback */
+.admin-sell-message {
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    padding: 14px 18px;
+    border: 1px solid #e9dfc7;
+    border-radius: 10px;
+    background: #fff9e9;
+    color: #6b5425;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+.admin-sell-state {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 35px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface);
+    color: var(--muted);
+    text-align: center;
+}
+.admin-sell-empty svg {
+    color: #b19a68;
+}
+.admin-sell-empty h2 {
+    margin: 15px 0 8px;
+    color: var(--navy);
+    font: 27px Georgia, serif;
+}
+.admin-sell-empty p {
+    margin-bottom: 0;
+}
+/* Requests layout */
+.admin-sell-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.admin-sell-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: var(--surface);
+    box-shadow: 0 7px 25px #102b4309;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.admin-sell-card:hover {
+    box-shadow: 0 12px 30px #102b4314;
+    transform: translateY(-2px);
+}
+/* Card header */
+.admin-sell-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 23px;
+    border-bottom: 1px solid var(--border);
+    background: #fcfbf8;
+}
+.admin-sell-card-label {
+    color: #9a7938;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+.admin-sell-card-header h2 {
+    margin: 9px 0 5px;
+    color: var(--navy);
+    font: 26px Georgia, serif;
+    overflow-wrap: anywhere;
+}
+.admin-sell-card-type {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+/* Status badge */
+.admin-sell-status {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 7px;
+    max-width: 170px;
+    padding: 8px 11px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.admin-sell-status-dot {
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.admin-sell-status.processing {
+    border-color: #efdfb8;
+    background: #fff7e4;
+    color: #926b1c;
+}
+.admin-sell-status.accepted {
+    border-color: #cbe6d4;
+    background: #edf8f0;
+    color: #287447;
+}
+.admin-sell-status.rejected {
+    border-color: #f0d2ce;
+    background: #fff0ee;
+    color: #a23f37;
+}
+/* Information sections */
+.admin-sell-section {
+    padding: 22px 23px;
+    border-bottom: 1px solid #efede7;
+}
+.admin-sell-section h3,
+.admin-sell-actions-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 16px;
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 700;
+}
+.admin-sell-section h3 > svg {
+    flex: 0 0 auto;
+    color: #a88d50;
+}
+.admin-sell-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.admin-sell-info {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 7px;
+    padding: 13px;
+    border: 1px solid #eeece6;
+    border-radius: 9px;
+    background: #fcfbf8;
+}
+.admin-sell-info > span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 11px;
+}
+.admin-sell-info > strong {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+.admin-sell-info .admin-sell-break {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.admin-sell-info.admin-sell-price {
+    border-color: #e9dfc7;
+    background: #fffaf0;
+}
+.admin-sell-info.admin-sell-price strong {
+    color: var(--navy);
+    font-size: 20px;
+}
+/* Additional information */
+.admin-sell-description {
+    margin: 0;
+    padding: 15px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    background: #fcfbf8;
+    color: #586873;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+/* Image gallery */
+.admin-sell-image-count {
+    display: inline-grid;
+    min-width: 24px;
+    height: 24px;
+    place-items: center;
+    margin-left: auto;
+    padding: 0 7px;
+    border-radius: 20px;
+    background: #f0ede5;
+    color: var(--navy);
+    font-size: 11px;
+}
+.admin-sell-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+.admin-sell-thumbnail {
+    position: relative;
+    display: block;
+    min-width: 0;
+    height: 115px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #eeece7;
+    cursor: zoom-in;
+}
+.admin-sell-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.25s;
+}
+.admin-sell-thumbnail:hover img {
+    transform: scale(1.06);
+}
+.admin-sell-thumbnail > span {
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    display: grid;
+    width: 29px;
+    height: 29px;
+    place-items: center;
+    border-radius: 7px;
+    background: #102b43df;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.admin-sell-thumbnail:hover > span,
+.admin-sell-thumbnail:focus-visible > span {
+    opacity: 1;
+}
+.admin-sell-no-images {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+/* Action area */
+.admin-sell-actions-section {
+    padding: 22px 23px 24px;
+    background: #fcfbf8;
+}
+.admin-sell-actions-section h3 {
+    margin-bottom: 15px;
+}
+.admin-sell-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+.admin-sell-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.admin-sell-action:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+.admin-sell-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+.processing-button {
+    border-color: #eadab5;
+    background: #fff7e4;
+    color: #8c681e;
+}
+.processing-button:hover:not(:disabled) {
+    background: #f9edcf;
+}
+.accepted-button {
+    border-color: #cbe6d4;
+    background: #edf8f0;
+    color: #287447;
+}
+.accepted-button:hover:not(:disabled) {
+    background: #dff1e4;
+}
+.rejected-button {
+    border-color: #f0d2ce;
+    background: #fff0ee;
+    color: #a23f37;
+}
+.rejected-button:hover:not(:disabled) {
+    background: #fbe1dd;
+}
+.admin-sell-action.delete-button {
+    border-color: #dfe2e4;
+    background: #fff;
+    color: #59636b;
+}
+.admin-sell-action.delete-button:hover:not(:disabled) {
+    border-color: #d7a6a0;
+    background: #fff3f1;
+    color: #a23f37;
+}
+.admin-sell-action-hint {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+}
+/* Full-screen image viewer */
+.admin-sell-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 65px 85px;
+    background: rgba(5, 16, 27, 0.95);
+    backdrop-filter: blur(5px);
+}
+.admin-sell-lightbox-content {
+    display: flex;
+    max-width: 100%;
+    max-height: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+.admin-sell-lightbox-content img {
+    display: block;
+    max-width: 100%;
+    max-height: 76vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 15px 55px #0005;
+}
+.admin-sell-lightbox-content p {
+    margin: 0;
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+}
+.admin-sell-lightbox-close,
+.admin-sell-lightbox-arrow {
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid #ffffff40;
+    border-radius: 50%;
+    background: #ffffffef;
+    color: var(--navy);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.admin-sell-lightbox-close:hover,
+.admin-sell-lightbox-arrow:hover {
+    background: var(--gold-light);
+    transform: scale(1.05);
+}
+.admin-sell-lightbox-close {
+    top: 22px;
+    right: 24px;
+}
+.admin-sell-lightbox-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.admin-sell-lightbox-arrow:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+.admin-sell-lightbox-arrow.prev {
+    left: 24px;
+}
+.admin-sell-lightbox-arrow.next {
+    right: 24px;
+}
+/* Responsive */
+@media (max-width: 1050px) {
+    .admin-sell-list {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+    }
+    .admin-sell-gallery {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+@media (max-width: 600px) {
+    .admin-sell-page {
+        padding: 20px 12px 35px;
+    }
+    .admin-sell-header {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 20px;
+    }
+    .admin-sell-header-icon {
+        flex-basis: 46px;
+        width: 46px;
+        height: 46px;
+    }
+    .admin-sell-header h1 {
+        font-size: 28px;
+    }
+    .admin-sell-header p {
+        font-size: 12px;
+    }
+    .admin-sell-total {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-left: 0;
+        padding: 10px 13px;
+        text-align: left;
+    }
+    .admin-sell-total strong {
+        font-size: 22px;
+    }
+    .admin-sell-card-header {
+        flex-direction: column;
+        padding: 19px;
+    }
+    .admin-sell-card-header h2 {
+        font-size: 24px;
+    }
+    .admin-sell-section,
+    .admin-sell-actions-section {
+        padding: 18px;
+    }
+    .admin-sell-info-grid {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+    .admin-sell-info {
+        padding: 12px;
+    }
+    .admin-sell-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .admin-sell-thumbnail {
+        height: 125px;
+    }
+    .admin-sell-actions {
+        grid-template-columns: 1fr;
+    }
+    .admin-sell-lightbox {
+        padding: 60px 16px;
+    }
+    .admin-sell-lightbox-content img {
+        max-height: 70vh;
+    }
+    .admin-sell-lightbox-arrow.prev {
+        left: 8px;
+    }
+    .admin-sell-lightbox-arrow.next {
+        right: 8px;
+    }
+    .admin-sell-lightbox-arrow,
+    .admin-sell-lightbox-close {
+        width: 40px;
+        height: 40px;
+    }
+}

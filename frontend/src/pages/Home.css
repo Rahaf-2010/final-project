@@ -1,0 +1,714 @@
+.issa-home {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    overflow: hidden;
+    background: #FAF7F1;
+    color: #202A32;
+}
+
+/* ---------- HERO ---------- */
+
+.issa-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 680px;
+    min-height: min(780px, 88vh);
+    padding: 90px 7%;
+    overflow: hidden;
+    isolation: isolate;
+
+    background-color: #0B1D2A;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(5, 17, 29, 0.96) 0%,
+            rgba(5, 17, 29, 0.82) 35%,
+            rgba(5, 17, 29, 0.35) 62%,
+            rgba(5, 17, 29, 0.05) 100%
+        ),
+        url("/Users/ririaawaraltal/Desktop/final-project/frontend/src/public/issa-hero.png");
+
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.issa-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        0deg,
+        rgba(5, 17, 29, 0.35),
+        transparent 35%
+    );
+}
+
+.issa-hero-content {
+    position: relative;
+    z-index: 1;
+    width: min(620px, 60%);
+    color: #FAF7F1;
+    animation: issa-hero-enter 0.8s ease-out both;
+}
+
+.issa-eyebrow {
+    margin: 0 0 22px;
+    color: #D8B779;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1.7;
+}
+
+.issa-hero-content h1 {
+    margin: 0;
+    color: #FAF7F1;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(42px, 5.3vw, 76px);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -1.8px;
+}
+
+.issa-hero-content h1 span {
+    color: #D8B779;
+}
+
+.issa-hero-description {
+    max-width: 480px;
+    margin: 25px 0 30px;
+    color: rgba(250, 247, 241, 0.8);
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.issa-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+.issa-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 50px;
+    padding: 0 23px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.isssa-button-gold {
+    background: #D8B779;
+    color: #0B1D2A;
+}
+
+.isssa-button-gold:hover {
+    transform: translateY(-2px);
+    background: #E7CB91;
+}
+
+.isssa-button-outline {
+    border-color: rgba(250, 247, 241, 0.55);
+    background: transparent;
+    color: #FAF7F1;
+}
+
+.isssa-button-outline:hover {
+    transform: translateY(-2px);
+    border-color: #D8B779;
+    color: #D8B779;
+}
+
+.issa-hero-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 52px;
+    color: rgba(250, 247, 241, 0.75);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.issa-note-line {
+    display: inline-block;
+    width: 36px;
+    height: 1px;
+    background: #D8B779;
+}
+
+.issa-hero-index {
+    position: absolute;
+    right: 7%;
+    bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(250, 247, 241, 0.75);
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.issa-hero-index span:first-child {
+    color: #D8B779;
+    font-size: 13px;
+}
+
+.issa-index-line {
+    display: inline-block;
+    width: 42px;
+    height: 1px;
+    background: rgba(216, 183, 121, 0.7);
+}
+
+/* ---------- SERVICES ---------- */
+
+.issa-services {
+    width: 100%;
+    padding: 100px 7%;
+    background: #FAF7F1;
+}
+
+.issa-section-heading {
+    max-width: 650px;
+    margin: 0 auto 48px;
+    text-align: center;
+}
+
+.issa-section-heading .issa-eyebrow {
+    margin-bottom: 14px;
+}
+
+.issa-section-heading h2,
+.issa-promise h2 {
+    margin: 0;
+    color: #0B1D2A;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.issa-section-heading > p:last-child {
+    max-width: 520px;
+    margin: 18px auto 0;
+    color: #7B838A;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.issa-service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.issa-service-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    min-height: 270px;
+    padding: 27px 23px;
+    border: 1px solid rgba(11, 29, 42, 0.1);
+    background: #FFFFFF;
+    text-align: left;
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.issa-service-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(216, 183, 121, 0.8);
+    box-shadow: 0 15px 35px rgba(11, 29, 42, 0.08);
+}
+
+.issa-service-number {
+    color: #94743B;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.issa-service-icon {
+    align-self: flex-end;
+    margin-top: -7px;
+    color: #C6A45E;
+    font-size: 25px;
+}
+
+.issa-service-card h3 {
+    margin: 25px 0 10px;
+    color: #0B1D2A;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.issa-service-card p {
+    margin: 0 0 24px;
+    color: #7B838A;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.issa-service-link {
+    margin-top: auto;
+    color: #94743B;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* ---------- BRAND PROMISE ---------- */
+
+.issa-promise {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 330px;
+    padding: 75px 10%;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            ellipse at 90% 20%,
+            rgba(216, 183, 121, 0.14),
+            transparent 45%
+        ),
+        #0B1D2A;
+}
+
+.issa-promise > div {
+    max-width: 650px;
+}
+
+.issa-promise h2 {
+    color: #FAF7F1;
+}
+
+.issa-promise > div > p:last-child {
+    max-width: 560px;
+    margin: 20px 0 0;
+    color: rgba(250, 247, 241, 0.72);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes issa-hero-enter {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 1000px) {
+    .issa-hero {
+        min-height: 650px;
+        padding: 75px 6%;
+        background-position: 58% center;
+    }
+
+    .issa-hero-content {
+        width: min(580px, 75%);
+    }
+
+    .issa-service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .issa-services {
+        padding: 80px 6%;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+    .issa-hero {
+        min-height: 720px;
+        min-height: 88svh;
+        padding: 65px 24px 90px;
+        align-items: center;
+        background-position: 62% center;
+    }
+
+    .issa-hero-content {
+        width: 100%;
+        max-width: 440px;
+    }
+
+    .issa-hero-content h1 {
+        font-size: clamp(39px, 10vw, 56px);
+        letter-spacing: -1px;
+    }
+
+    .issa-hero-description {
+        max-width: 360px;
+        font-size: 14px;
+    }
+
+    .issa-hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        width: min(100%, 300px);
+    }
+
+    .issa-button {
+        width: 100%;
+    }
+
+    .issa-hero-note {
+        margin-top: 35px;
+        font-size: 9px;
+    }
+
+    .issa-hero-index {
+        right: 24px;
+        bottom: 23px;
+        font-size: 8px;
+    }
+
+    .issa-services {
+        padding: 65px 20px;
+    }
+
+    .issa-section-heading {
+        margin-bottom: 32px;
+    }
+
+    .issa-section-heading h2,
+    .issa-promise h2 {
+        font-size: 34px;
+    }
+
+    .issa-service-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .issa-service-card {
+        min-height: 225px;
+        padding: 24px;
+    }
+
+    .issa-promise {
+        min-height: 300px;
+        padding: 60px 24px;
+    }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .issa-hero-content {
+        animation: none;
+    }
+
+    .issa-button,
+    .issa-service-card {
+        transition: none;
+    }
+}
+
+/* Premium gold hover effect */
+.issa-service-card {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.issa-service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #D8B779;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.issa-service-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(216, 183, 121, 0.75);
+    box-shadow: 0 18px 38px rgba(11, 29, 42, 0.1);
+}
+
+.issa-service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.issa-service-link {
+    transition: color 0.25s ease;
+}
+
+.issa-service-card:hover .issa-service-link {
+    color: #0B1D2A;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .issa-service-card,
+    .issa-service-card::before,
+    .issa-service-link {
+        transition: none;
+    }
+
+    .issa-service-card:hover {
+        transform: none;
+    }
+}
+
+/* Full-width homepage only */
+body:has(.issa-home) {
+    margin: 0;
+}
+
+#root:has(.issa-home) {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+#root:has(.issa-home) > div {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Premium trust section */
+.issa-promise {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 100px 7%;
+    overflow: hidden;
+    color: #FAF7F1;
+    text-align: center;
+    background:
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(216, 183, 121, 0.12),
+            transparent 58%
+        ),
+        #0B1D2A;
+}
+
+.issa-promise-inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.issa-promise-eyebrow {
+    margin: 0 0 20px;
+    color: #D8B779;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1.8;
+}
+
+.issa-promise h2 {
+    margin: 0;
+    color: #FAF7F1;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.issa-promise h2 span {
+    color: #D8B779;
+}
+
+.issa-promise-description {
+    max-width: 650px;
+    margin: 22px auto 0;
+    color: rgba(250, 247, 241, 0.72);
+    font-size: 15px;
+    line-height: 1.9;
+    text-align: center;
+}
+
+.issa-promise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 55px;
+}
+
+.issa-promise-card {
+    min-width: 0;
+    padding: 34px 25px;
+    border: 1px solid rgba(216, 183, 121, 0.22);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.025);
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+.issa-promise-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(216, 183, 121, 0.65);
+    background: rgba(255, 255, 255, 0.045);
+}
+
+.issa-promise-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 22px;
+    border: 1px solid rgba(216, 183, 121, 0.45);
+    border-radius: 50%;
+    color: #D8B779;
+}
+
+.issa-promise-icon svg {
+    display: block;
+    width: 27px;
+    height: 27px;
+}
+
+.issa-promise-card h3 {
+    margin: 0 0 12px;
+    color: #FAF7F1;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.issa-promise-card p {
+    margin: 0;
+    color: rgba(250, 247, 241, 0.65);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.issa-promise-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 48px;
+    margin-top: 38px;
+    padding: 0 24px;
+    border: 1px solid #D8B779;
+    border-radius: 2px;
+    background: #D8B779;
+    color: #0B1D2A;
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.issa-promise-button:hover {
+    background: transparent;
+    color: #D8B779;
+}
+
+.issa-promise-button span {
+    font-size: 17px;
+}
+
+@media (max-width: 800px) {
+    .issa-promise {
+        padding: 75px 6%;
+    }
+
+    .issa-promise-grid {
+        gap: 15px;
+        margin-top: 40px;
+    }
+
+    .issa-promise-card {
+        padding: 28px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .issa-promise {
+        padding: 65px 22px;
+    }
+
+    .issa-promise-eyebrow {
+        font-size: 9px;
+        letter-spacing: 2px;
+    }
+
+    .issa-promise-description {
+        font-size: 14px;
+    }
+
+    .issa-promise-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .issa-promise-card {
+        padding: 25px 22px;
+    }
+
+    .issa-promise-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .issa-promise-card,
+    .issa-promise-button {
+        transition: none;
+    }
+
+    .issa-promise-card:hover {
+        transform: none;
+    }
+}

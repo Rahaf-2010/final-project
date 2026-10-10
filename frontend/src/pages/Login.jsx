@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import api from "../services/api";
 import { Eye, EyeOff } from "lucide-react";
+import "./Login.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -27,11 +28,18 @@ function Login() {
         setMessage("");
         try {
             const response = await api.post("/auth/login", formData);
+            console.log("Login user:", response.data);
             
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
+
+            const user = response.data.user;
             
-            navigate("/");
+            if (user.role === "admin") {
+                navigate("/admin");
+            } else {
+                navigate("/");
+            }
         } catch (error) {
             console.error("Fehler beim Login:", error.response.data);
             setMessage(error.response.data.message || "Fehler beim Login.");
@@ -39,7 +47,18 @@ function Login() {
     };
 
     return (
-        <div>
+        <>
+        <header className="auth-header">
+            <button
+                type="button"
+                className="auth-logo"
+                onClick={() => navigate("/")}
+                aria-label="ISSA AUTOMOBILE Startseite"
+            >
+                <span>ISSA <strong>AUTOMOBILE</strong></span>
+            </button>
+        </header>
+        <div className="login-page">
             <h1>Login</h1>
 
             <form onSubmit={handleSubmit}>
@@ -89,9 +108,16 @@ function Login() {
             <p>Noch keinen Account? {""}
                 <button type="button" onClick={() => navigate("/register")}>Jetzt registrieren</button>
             </p>
+            <button
+                type="button"
+                onClick={() => navigate("/")}
+            >
+                Als Gast fortfahren
+            </button>
             
             {message && <p>{message}</p>}
         </div>
+        </>
     );
 }
 

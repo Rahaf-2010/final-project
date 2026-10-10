@@ -1,0 +1,277 @@
+/* ===== ISSA AUTOMOBILE FOOTER ===== */
+
+.issa-footer {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 60px 6% 0;
+    background: #0b1d2a;
+    color: #f8f5ee;
+    font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.issa-footer * {
+    box-sizing: border-box;
+}
+
+.issa-footer-main {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.9fr 0.8fr 1.3fr;
+    gap: 55px;
+    align-items: start;
+    padding-bottom: 50px;
+}
+
+.issa-footer-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.issa-footer-column h3 {
+    margin: 0 0 25px;
+    padding-bottom: 13px;
+    width: 100%;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(216, 183, 121, 0.35);
+}
+
+.issa-footer-column h3::after {
+    content: "";
+    display: block;
+    position: relative;
+    top: 14px;
+    width: 42px;
+    height: 2px;
+    background: #d8b779;
+}
+
+/* Contact links */
+
+.issa-footer-column > a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 12px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #e7ebed;
+    font-size: 13px;
+    line-height: 1.6;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: background 0.2s ease, border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.issa-footer-column > a svg {
+    flex-shrink: 0;
+    color: #d8b779;
+}
+
+.issa-footer-column > a:hover {
+    background: rgba(216, 183, 121, 0.1);
+    border-color: rgba(216, 183, 121, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Navigation links */
+
+.issa-footer-column > button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 3px 0;
+    border: 0;
+    background: transparent;
+    color: #c0c9cf;
+    font-size: 14px;
+    text-align: left;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.issa-footer-column > button:hover {
+    padding-left: 6px;
+    color: #d8b779;
+}
+
+/* Address and opening hours */
+
+.issa-footer-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    width: 100%;
+    margin: 0 0 22px;
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.035);
+    color: #c0c9cf;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.issa-footer-info svg {
+    flex-shrink: 0;
+    margin-top: 4px;
+    color: #d8b779;
+}
+
+/* Bottom bar */
+
+.issa-footer-bottom {
+    width: 100%;
+    max-width: 1250px;
+    min-height: 82px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.issa-footer-bottom p {
+    margin: 0;
+    color: #aab5bd;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.issa-footer-bottom p:nth-child(2) {
+    color: #d8b779;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.issa-footer-top {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(216, 183, 121, 0.55);
+    border-radius: 50%;
+    background: transparent;
+    color: #d8b779;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.issa-footer-top:hover {
+    background: #d8b779;
+    color: #0b1d2a;
+}
+
+/* Tablet */
+
+@media (max-width: 950px) {
+    .issa-footer {
+        padding: 45px 5% 0;
+    }
+
+    .issa-footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+
+    .issa-footer-column:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .issa-footer-column:last-child .issa-footer-info {
+        max-width: 600px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .issa-footer {
+        padding: 38px 20px 0;
+    }
+
+    .issa-footer-main {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+        padding-bottom: 30px;
+    }
+
+    .issa-footer-column:last-child {
+        grid-column: auto;
+    }
+
+    .issa-footer-column h3 {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
+
+    .issa-footer-column > a,
+    .issa-footer-info {
+        padding: 13px;
+    }
+
+    .issa-footer-bottom {
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 20px 0;
+    }
+
+    .issa-footer-bottom p:first-child {
+        flex: 1 1 75%;
+    }
+
+    .issa-footer-bottom p:nth-child(2) {
+        order: 3;
+        width: 100%;
+        text-align: left;
+    }
+
+    .issa-footer-top {
+        margin-left: auto;
+    }
+}
+
+/* Center content inside address and opening-hours cards */
+
+.issa-footer-info {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.issa-footer-info svg {
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.issa-footer-info span {
+    flex: 0 1 auto;
+    text-align: center;
+    line-height: 2;
+}
+
+/* Keep cards centered on mobile too */
+
+@media (max-width: 600px) {
+    .issa-footer-info {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .issa-footer-info span {
+        text-align: center;
+    }
+}

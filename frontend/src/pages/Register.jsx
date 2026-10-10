@@ -1,7 +1,9 @@
 import {useState} from 'react'
 import {useNavigate} from "react-router-dom";
+import {ArrowLeft} from "lucide-react";
 import api from "../services/api";
 import {Eye, EyeOff} from "lucide-react";
+import "./Register.css";
 
 
 function Register() {
@@ -70,8 +72,40 @@ function Register() {
         }
     };
 
+    const goBack = () => {
+        if(window.history.length > 1) {
+            navigate(-1);
+        } else {
+            navigate("/");
+        }
+    };
+
     return (
-        <div>
+        <>
+        <header className="auth-header">
+                <button
+                    type="button"
+                    className="auth-back-button"
+                    onClick={goBack}
+                    aria-label="Zurück"
+                    title="Zurück"
+                >
+                    <ArrowLeft size={17} />
+                </button>
+                <button
+                    type="button"
+                    className="auth-logo"
+                    onClick={() => navigate("/")}
+                    aria-label="ISSA AUTOMOBILE startseite"
+                    
+                >
+                    <span>ISSA <strong>AUTOMOBILE</strong></span>
+                </button>
+
+            </header>
+
+        <div className="register-page">
+
             <h1>Registrierung</h1>
 
             <form onSubmit={handleSubmit}> 
@@ -152,6 +186,8 @@ function Register() {
 
             {message && <p>{message}</p>}
         </div>
+    );
+        </>
     );
 }
 

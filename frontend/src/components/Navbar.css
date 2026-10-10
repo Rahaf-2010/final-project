@@ -1,0 +1,273 @@
+.issa-navbar {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    min-height: 88px;
+    padding: 14px 6%;
+    border-bottom: 1px solid rgba(216, 183, 121, 0.2);
+    color: #fff;
+    background: #091B2B;
+}
+
+.issa-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    color: #D8B779;
+    background: transparent;
+}
+
+.issa-brand:hover {
+    transform: translateY(-1px);
+}
+
+.issa-brand-name {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.05;
+}
+
+.issa-brand-line {
+    width: 100%;
+    height: 1px;
+    margin: 5px 0;
+    background: #D8B779;
+}
+
+.issa-brand-subtitle {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+}
+
+.issa-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.issa-nav-links button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 13px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #E1E5E9;
+    background: transparent;
+    font-size: 0.84rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.issa-nav-links button:hover,
+.issa-nav-links button.active {
+    color: #F0D9A7;
+    background: rgba(216, 183, 121, 0.07);
+}
+
+.issa-nav-links button.active::after {
+    position: absolute;
+    right: 13px;
+    bottom: 3px;
+    left: 13px;
+    height: 2px;
+    content: "";
+    background: #D8B779;
+}
+
+.issa-nav-links .issa-logout {
+    margin-left: 8px;
+    padding: 11px 17px;
+    border-color: #D8B779;
+    color: #091B2B;
+    background: #D8B779;
+    font-weight: 700;
+}
+
+.issa-nav-links .issa-logout:hover {
+    color: #091B2B;
+    background: #F0D9A7;
+}
+
+.issa-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 9px;
+    border: 1px solid rgba(216, 183, 121, 0.4);
+    border-radius: 5px;
+    color: #D8B779;
+    background: transparent;
+}
+
+@media (max-width: 760px) {
+    .issa-navbar {
+        min-height: 76px;
+        padding: 12px 5%;
+    }
+
+    .issa-brand-name {
+        font-size: 1.7rem;
+    }
+
+    .issa-menu-toggle {
+        display: inline-flex;
+    }
+
+    .issa-nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 5px;
+        padding: 16px 5% 20px;
+        border-bottom: 1px solid rgba(216, 183, 121, 0.25);
+        background: #091B2B;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .issa-nav-links.is-open {
+        display: flex;
+    }
+
+    .issa-nav-links button {
+        justify-content: flex-start;
+        width: 100%;
+        padding: 13px;
+    }
+
+    .issa-nav-links button.active::after {
+        right: auto;
+        bottom: 5px;
+        left: 13px;
+        width: 30px;
+    }
+
+    .issa-nav-links .issa-logout {
+        margin: 5px 0 0;
+    }
+}
+
+.issa-navbar {
+    justify-content: flex-end;
+    min-height: 72px;
+}
+
+.issa-nav-links {
+    gap: 12px;
+}
+
+.issa-nav-links button,
+.issa-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(216, 183, 121, 0.28);
+    border-radius: 50%;
+    color: #D8B779;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.issa-nav-links button:hover,
+.issa-icon-button:hover {
+    color: #091B2B;
+    background: #D8B779;
+}
+
+@media (max-width: 760px) {
+    .issa-navbar {
+        justify-content: center;
+    }
+
+    .issa-nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 7px;
+    }
+
+    .issa-nav-links button,
+    .issa-icon-button {
+        width: 39px;
+        height: 39px;
+    }
+
+    .issa-menu-toggle {
+        display: none;
+    }
+}
+
+.issa-navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.issa-back-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(242, 209, 139, 0.45);
+    border-radius: 50%;
+    background: transparent;
+    color: #f2d18b;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.issa-back-button:hover {
+    background: rgba(242, 209, 139, 0.14);
+    transform: translateX(-2px);
+}
+
+.issa-navbar span {
+    color: #d7b66c;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.issa-navbar span strong {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+@media (max-width: 600px) {
+    .issa-navbar span {
+        font-size: 15px;
+        letter-spacing: 1px;
+    }
+}
+
+.issa-navbar {
+    display: flex;
+    align-items: center;
+}
+
+.issa-navbar span {
+    margin-right: auto;
+}
