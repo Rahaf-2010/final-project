@@ -31,7 +31,7 @@
             rgba(5, 17, 29, 0.35) 62%,
             rgba(5, 17, 29, 0.05) 100%
         ),
-        url("/Users/ririaawaraltal/Desktop/final-project/frontend/src/public/issa-hero.png");
+        url("/issa-hero.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
