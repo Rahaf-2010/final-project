@@ -36,7 +36,7 @@ function Footer() {
                     {/* E-Mail */}
                     <a href="mailto:info@issa-automobile.de">
                         <Mail size={17} />
-                        <span>info@issa-automobile.de</span>
+                        <span>issaabdulautomobile@gmail.com</span>
                     </a>
                 </div>
 

@@ -6,25 +6,22 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    left: 0;
     overflow: hidden;
     background: #FAF7F1;
     color: #202A32;
 }
 
-/* ---------- HERO ---------- */
+/*HERO*/
 
 .issa-hero {
     position: relative;
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 680px;
     min-height: min(780px, 88vh);
     padding: 90px 7%;
     overflow: hidden;
     isolation: isolate;
-
     background-color: #0B1D2A;
     background-image:
         linear-gradient(
@@ -35,7 +32,6 @@
             rgba(5, 17, 29, 0.05) 100%
         ),
         url("/Users/ririaawaraltal/Desktop/final-project/frontend/src/public/issa-hero.png");
-
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -232,19 +228,37 @@
     min-width: 0;
     min-height: 270px;
     padding: 27px 23px;
+    overflow: hidden;
     border: 1px solid rgba(11, 29, 42, 0.1);
     background: #FFFFFF;
     text-align: left;
     transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.issa-service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #D8B779;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .issa-service-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(216, 183, 121, 0.8);
-    box-shadow: 0 15px 35px rgba(11, 29, 42, 0.08);
+    transform: translateY(-6px);
+    border-color: rgba(216, 183, 121, 0.75);
+    box-shadow: 0 18px 38px rgba(11, 29, 42, 0.1);
+}
+
+.issa-service-card:hover::before {
+    transform: scaleX(1);
 }
 
 .issa-service-number {
@@ -280,201 +294,6 @@
     color: #94743B;
     font-size: 11px;
     font-weight: 700;
-}
-
-/* ---------- BRAND PROMISE ---------- */
-
-.issa-promise {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 330px;
-    padding: 75px 10%;
-    overflow: hidden;
-    background:
-        radial-gradient(
-            ellipse at 90% 20%,
-            rgba(216, 183, 121, 0.14),
-            transparent 45%
-        ),
-        #0B1D2A;
-}
-
-.issa-promise > div {
-    max-width: 650px;
-}
-
-.issa-promise h2 {
-    color: #FAF7F1;
-}
-
-.issa-promise > div > p:last-child {
-    max-width: 560px;
-    margin: 20px 0 0;
-    color: rgba(250, 247, 241, 0.72);
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-/* ---------- ANIMATION ---------- */
-
-@keyframes issa-hero-enter {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ---------- TABLET ---------- */
-
-@media (max-width: 1000px) {
-    .issa-hero {
-        min-height: 650px;
-        padding: 75px 6%;
-        background-position: 58% center;
-    }
-
-    .issa-hero-content {
-        width: min(580px, 75%);
-    }
-
-    .issa-service-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .issa-services {
-        padding: 80px 6%;
-    }
-}
-
-/* ---------- MOBILE ---------- */
-
-@media (max-width: 600px) {
-    .issa-hero {
-        min-height: 720px;
-        min-height: 88svh;
-        padding: 65px 24px 90px;
-        align-items: center;
-        background-position: 62% center;
-    }
-
-    .issa-hero-content {
-        width: 100%;
-        max-width: 440px;
-    }
-
-    .issa-hero-content h1 {
-        font-size: clamp(39px, 10vw, 56px);
-        letter-spacing: -1px;
-    }
-
-    .issa-hero-description {
-        max-width: 360px;
-        font-size: 14px;
-    }
-
-    .issa-hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-        width: min(100%, 300px);
-    }
-
-    .issa-button {
-        width: 100%;
-    }
-
-    .issa-hero-note {
-        margin-top: 35px;
-        font-size: 9px;
-    }
-
-    .issa-hero-index {
-        right: 24px;
-        bottom: 23px;
-        font-size: 8px;
-    }
-
-    .issa-services {
-        padding: 65px 20px;
-    }
-
-    .issa-section-heading {
-        margin-bottom: 32px;
-    }
-
-    .issa-section-heading h2,
-    .issa-promise h2 {
-        font-size: 34px;
-    }
-
-    .issa-service-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .issa-service-card {
-        min-height: 225px;
-        padding: 24px;
-    }
-
-    .issa-promise {
-        min-height: 300px;
-        padding: 60px 24px;
-    }
-}
-
-/* ---------- REDUCED MOTION ---------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .issa-hero-content {
-        animation: none;
-    }
-
-    .issa-button,
-    .issa-service-card {
-        transition: none;
-    }
-}
-
-/* Premium gold hover effect */
-.issa-service-card {
-    position: relative;
-    overflow: hidden;
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.issa-service-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: #D8B779;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.issa-service-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(216, 183, 121, 0.75);
-    box-shadow: 0 18px 38px rgba(11, 29, 42, 0.1);
-}
-
-.issa-service-card:hover::before {
-    transform: scaleX(1);
-}
-
-.issa-service-link {
     transition: color 0.25s ease;
 }
 
@@ -482,38 +301,8 @@
     color: #0B1D2A;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .issa-service-card,
-    .issa-service-card::before,
-    .issa-service-link {
-        transition: none;
-    }
+/* ---------- BRAND PROMISE ---------- */
 
-    .issa-service-card:hover {
-        transform: none;
-    }
-}
-
-/* Full-width homepage only */
-body:has(.issa-home) {
-    margin: 0;
-}
-
-#root:has(.issa-home) {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-}
-
-#root:has(.issa-home) > div {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Premium trust section */
 .issa-promise {
     position: relative;
     isolation: isolate;
@@ -521,11 +310,10 @@ body:has(.issa-home) {
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 330px;
     margin: 0;
     padding: 100px 7%;
     overflow: hidden;
-    color: #FAF7F1;
-    text-align: center;
     background:
         radial-gradient(
             ellipse at 50% 0%,
@@ -533,6 +321,8 @@ body:has(.issa-home) {
             transparent 58%
         ),
         #0B1D2A;
+    color: #FAF7F1;
+    text-align: center;
 }
 
 .issa-promise-inner {
@@ -658,6 +448,64 @@ body:has(.issa-home) {
     font-size: 17px;
 }
 
+/* ---------- ANIMATION ---------- */
+
+@keyframes issa-hero-enter {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- FULL-WIDTH HOMEPAGE ---------- */
+
+body:has(.issa-home) {
+    margin: 0;
+}
+
+#root:has(.issa-home) {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+#root:has(.issa-home) > div {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 1000px) {
+    .issa-hero {
+        min-height: 650px;
+        padding: 75px 6%;
+        background-position: 58% center;
+    }
+
+    .issa-hero-content {
+        width: min(580px, 75%);
+    }
+
+    .issa-service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .issa-services {
+        padding: 80px 6%;
+    }
+}
+
+/* ---------- MEDIUM SCREENS ---------- */
+
 @media (max-width: 800px) {
     .issa-promise {
         padding: 75px 6%;
@@ -673,14 +521,86 @@ body:has(.issa-home) {
     }
 }
 
+/* ---------- MOBILE ---------- */
+
 @media (max-width: 600px) {
+    .issa-hero {
+        min-height: 88svh;
+        padding: 65px 24px 90px;
+        align-items: center;
+        background-position: 62% center;
+    }
+
+    .issa-hero-content {
+        width: 100%;
+        max-width: 440px;
+    }
+
+    .issa-hero-content h1 {
+        font-size: clamp(39px, 10vw, 56px);
+        letter-spacing: -1px;
+    }
+
+    .issa-hero-description {
+        max-width: 360px;
+        font-size: 14px;
+    }
+
+    .issa-hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        width: min(100%, 300px);
+    }
+
+    .issa-button {
+        width: 100%;
+    }
+
+    .issa-hero-note {
+        margin-top: 35px;
+        font-size: 9px;
+    }
+
+    .issa-hero-index {
+        right: 24px;
+        bottom: 23px;
+        font-size: 8px;
+    }
+
+    .issa-services {
+        padding: 65px 20px;
+    }
+
+    .issa-section-heading {
+        margin-bottom: 32px;
+    }
+
+    .issa-section-heading h2 {
+        font-size: 34px;
+    }
+
+    .issa-service-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .issa-service-card {
+        min-height: 225px;
+        padding: 24px;
+    }
+
     .issa-promise {
+        min-height: 300px;
         padding: 65px 22px;
     }
 
     .issa-promise-eyebrow {
         font-size: 9px;
         letter-spacing: 2px;
+    }
+
+    .issa-promise h2 {
+        font-size: 34px;
     }
 
     .issa-promise-description {
@@ -702,12 +622,23 @@ body:has(.issa-home) {
     }
 }
 
+/* ---------- REDUCED MOTION ---------- */
+
 @media (prefers-reduced-motion: reduce) {
+    .issa-hero-content {
+        animation: none;
+    }
+
+    .issa-button,
+    .issa-service-card,
+    .issa-service-card::before,
+    .issa-service-link,
     .issa-promise-card,
     .issa-promise-button {
         transition: none;
     }
 
+    .issa-service-card:hover,
     .issa-promise-card:hover {
         transform: none;
     }

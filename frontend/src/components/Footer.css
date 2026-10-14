@@ -9,66 +9,84 @@
     font-family: "Inter", "Segoe UI", sans-serif;
 }
 
-.issa-footer * {
+.issa-footer *,
+.issa-footer *::before,
+.issa-footer *::after {
     box-sizing: border-box;
 }
 
+/* Main layout */
+
 .issa-footer-main {
+    display: grid;
+    grid-template-columns: 0.9fr 0.8fr 1.3fr;
+    align-items: start;
+    gap: 55px;
+
     width: 100%;
     max-width: 1250px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 0.9fr 0.8fr 1.3fr;
-    gap: 55px;
-    align-items: start;
     padding-bottom: 50px;
 }
 
 .issa-footer-column {
-    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 0;
 }
 
+/* Headings */
+
 .issa-footer-column h3 {
+    width: 100%;
     margin: 0 0 25px;
     padding-bottom: 13px;
-    width: 100%;
+
+    border-bottom: 1px solid rgba(216, 183, 121, 0.35);
+
     color: #ffffff;
     font-size: 21px;
     font-weight: 600;
-    border-bottom: 1px solid rgba(216, 183, 121, 0.35);
 }
 
 .issa-footer-column h3::after {
-    content: "";
-    display: block;
     position: relative;
     top: 14px;
+
+    display: block;
     width: 42px;
     height: 2px;
+
     background: #d8b779;
+    content: "";
 }
 
 /* Contact links */
 
 .issa-footer-column > a {
-    width: 100%;
     display: flex;
     align-items: center;
     gap: 13px;
+
+    width: 100%;
     margin: 0 0 12px;
     padding: 14px;
+
     border: 1px solid rgba(255, 255, 255, 0.09);
     border-radius: 10px;
+
     background: rgba(255, 255, 255, 0.04);
     color: #e7ebed;
+
     font-size: 13px;
     line-height: 1.6;
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition: background 0.2s ease, border-color 0.2s ease,
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
         transform 0.2s ease;
 }
 
@@ -88,15 +106,21 @@
 .issa-footer-column > button {
     display: flex;
     align-items: center;
+
     width: 100%;
     margin: 0 0 15px;
     padding: 3px 0;
+
     border: 0;
     background: transparent;
     color: #c0c9cf;
+
     font-size: 14px;
     text-align: left;
-    transition: color 0.2s ease, padding-left 0.2s ease;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
 }
 
 .issa-footer-column > button:hover {
@@ -108,37 +132,51 @@
 
 .issa-footer-info {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 13px;
+
     width: 100%;
     margin: 0 0 22px;
     padding: 15px;
+
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
+
     background: rgba(255, 255, 255, 0.035);
     color: #c0c9cf;
+
     font-size: 13px;
     line-height: 2;
+    text-align: center;
 }
 
 .issa-footer-info svg {
     flex-shrink: 0;
-    margin-top: 4px;
+    margin-top: 0;
     color: #d8b779;
+}
+
+.issa-footer-info span {
+    flex: 0 1 auto;
+    text-align: center;
+    line-height: 2;
 }
 
 /* Bottom bar */
 
 .issa-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
     width: 100%;
     max-width: 1250px;
     min-height: 82px;
     margin: 0 auto;
     padding: 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+
     border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -161,13 +199,19 @@
     display: grid;
     place-items: center;
     flex-shrink: 0;
+
     width: 42px;
     height: 42px;
+
     border: 1px solid rgba(216, 183, 121, 0.55);
     border-radius: 50%;
+
     background: transparent;
     color: #d8b779;
-    transition: background 0.2s ease, color 0.2s ease;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
 .issa-footer-top:hover {
@@ -214,13 +258,22 @@
     }
 
     .issa-footer-column h3 {
-        font-size: 19px;
         margin-bottom: 20px;
+        font-size: 19px;
     }
 
     .issa-footer-column > a,
     .issa-footer-info {
         padding: 13px;
+    }
+
+    .issa-footer-info {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .issa-footer-info span {
+        text-align: center;
     }
 
     .issa-footer-bottom {
@@ -241,37 +294,5 @@
 
     .issa-footer-top {
         margin-left: auto;
-    }
-}
-
-/* Center content inside address and opening-hours cards */
-
-.issa-footer-info {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.issa-footer-info svg {
-    flex-shrink: 0;
-    margin-top: 0;
-}
-
-.issa-footer-info span {
-    flex: 0 1 auto;
-    text-align: center;
-    line-height: 2;
-}
-
-/* Keep cards centered on mobile too */
-
-@media (max-width: 600px) {
-    .issa-footer-info {
-        justify-content: center;
-        text-align: center;
-    }
-
-    .issa-footer-info span {
-        text-align: center;
     }
 }

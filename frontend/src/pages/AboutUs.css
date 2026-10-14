@@ -1,3 +1,8 @@
+/* =========================
+   ISSA Automobile — About Page
+   Clean stylesheet, without duplicate selectors
+   ========================= */
+
 .about-page {
     --about-navy: #0b1d2a;
     --about-gold: #d8b779;
@@ -6,13 +11,21 @@
     --about-muted: #737c83;
     --about-border: #e9e1d4;
 
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
     background: var(--about-cream);
     color: var(--about-text);
     font-family: "Inter", "Segoe UI", sans-serif;
+    overflow-x: clip;
+    box-sizing: border-box;
 }
 
-.about-page * {
+.about-page *,
+.about-page *::before,
+.about-page *::after {
     box-sizing: border-box;
 }
 
@@ -34,6 +47,10 @@
     outline-offset: 3px;
 }
 
+/* =========================
+   Eyebrow
+   ========================= */
+
 .about-eyebrow {
     display: inline-block;
     color: #ad8a48;
@@ -43,27 +60,46 @@
     line-height: 1.8;
 }
 
+/* =========================
+   Hero Section
+   ========================= */
+
 .about-hero {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     align-items: center;
     gap: 45px;
+
+    width: 100%;
+    max-width: 100%;
     min-height: 490px;
+
+    margin: 0;
     padding: 75px max(7%, calc((100% - 1180px) / 2));
+
     overflow: hidden;
+
     background:
-        radial-gradient(ellipse at 85% 30%, rgba(216, 183, 121, 0.13), transparent 35%),
+        radial-gradient(
+            ellipse at 85% 30%,
+            rgba(216, 183, 121, 0.13),
+            transparent 35%
+        ),
         linear-gradient(125deg, #0b1d2a, #172f40);
+
     color: #fff;
 }
 
 .about-hero-content {
+    min-width: 0;
     max-width: 650px;
 }
 
 .about-hero h1 {
     margin: 20px 0;
+
     color: #fff;
+
     font-family: "Playfair Display", Georgia, serif;
     font-size: clamp(38px, 5vw, 62px);
     font-weight: 500;
@@ -79,10 +115,15 @@
 .about-hero-content > p {
     max-width: 570px;
     margin: 0 0 28px;
+
     color: #d0d7dc;
     font-size: 15px;
     line-height: 1.9;
 }
+
+/* =========================
+   Buttons
+   ========================= */
 
 .about-primary-button,
 .about-outline-button {
@@ -90,14 +131,21 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+
     min-height: 46px;
     padding: 12px 20px;
+
     border: 1px solid var(--about-gold);
     border-radius: 8px;
+
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .about-primary-button {
@@ -129,26 +177,43 @@
     color: var(--about-navy);
 }
 
+/* =========================
+   Hero Decoration
+   ========================= */
+
 .about-hero-decoration {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 24px;
+
+    min-width: 0;
     min-height: 270px;
+
     color: var(--about-gold);
 }
 
 .about-hero-icon {
     display: grid;
     place-items: center;
+
     width: 230px;
     height: 230px;
+    max-width: 100%;
+
     border: 1px solid rgba(216, 183, 121, 0.4);
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(216, 183, 121, 0.13), transparent 68%);
-    box-shadow: 0 0 0 20px rgba(216, 183, 121, 0.035),
-                0 0 0 42px rgba(216, 183, 121, 0.025);
+
+    background: radial-gradient(
+        circle,
+        rgba(216, 183, 121, 0.13),
+        transparent 68%
+    );
+
+    box-shadow:
+        0 0 0 20px rgba(216, 183, 121, 0.035),
+        0 0 0 42px rgba(216, 183, 121, 0.025);
 }
 
 .about-hero-decoration > span {
@@ -158,8 +223,15 @@
     text-align: center;
 }
 
-.about-section {
+/* =========================
+   General Sections
+   ========================= */
+
+.about-section,
+.about-reviews-section {
     width: min(1120px, calc(100% - 40px));
+    max-width: 100%;
+
     margin: 0 auto;
     padding: 78px 0;
 }
@@ -172,7 +244,9 @@
 .about-section h2,
 .about-contact-copy h2 {
     margin: 12px 0 18px;
+
     color: var(--about-navy);
+
     font-family: "Playfair Display", Georgia, serif;
     font-size: clamp(29px, 3.5vw, 40px);
     font-weight: 500;
@@ -182,6 +256,7 @@
 .about-intro > p,
 .about-section-heading > p {
     margin: 0 auto;
+
     color: var(--about-muted);
     font-size: 14px;
     line-height: 2;
@@ -196,6 +271,10 @@
     max-width: 620px;
 }
 
+/* =========================
+   Services Grid
+   ========================= */
+
 .about-services-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -205,11 +284,17 @@
 .about-service-card {
     min-width: 0;
     padding: 28px 22px;
+
     border: 1px solid var(--about-border);
     border-radius: 13px;
+
     background: #fff;
+
     box-shadow: 0 10px 28px rgba(11, 29, 42, 0.035);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .about-service-card:hover {
@@ -220,17 +305,22 @@
 .about-service-icon {
     display: grid;
     place-items: center;
+
     width: 52px;
     height: 52px;
-    margin-bottom: 22px;
+
+    margin: 0 0 22px;
+
     border: 1px solid #eadcc0;
     border-radius: 12px;
+
     background: #faf5e9;
     color: #9a783d;
 }
 
 .about-service-card h3 {
     margin: 0 0 12px;
+
     color: var(--about-navy);
     font-size: 16px;
     line-height: 1.5;
@@ -238,74 +328,204 @@
 
 .about-service-card p {
     margin: 0;
+
     color: var(--about-muted);
     font-size: 13px;
     line-height: 1.9;
 }
 
+/* =========================
+   Contact Section
+   Full Width
+   ========================= */
+
 .about-contact-section {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     align-items: center;
     gap: 45px;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
     padding: 65px max(7%, calc((100% - 1120px) / 2));
+
     background: #f0e9dc;
+}
+
+.about-contact-copy {
+    min-width: 0;
 }
 
 .about-contact-copy > p {
     max-width: 420px;
+
     color: #657078;
     font-size: 14px;
     line-height: 1.9;
 }
 
+/* =========================
+   Contact Cards
+   ========================= */
+
 .about-contact-cards {
     display: grid;
     gap: 12px;
+
+    min-width: 0;
 }
 
 .about-contact-card {
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 19px;
-    border: 1px solid rgba(11, 29, 42, 0.08);
-    border-radius: 11px;
-    background: rgba(255, 255, 255, 0.75);
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+
+    width: 100%;
+    max-width: 680px;
+    min-width: 0;
+
+    margin: 0 auto 20px;
+    padding: 24px;
+
+    border: 1px solid #e8c98f;
+    border-radius: 20px;
+
+    background: rgba(255, 253, 248, 0.92);
+
+    box-shadow: 0 12px 35px rgba(11, 29, 42, 0.055);
+
+    color: var(--about-navy);
+    font-family: "Segoe UI", Arial, sans-serif;
+    text-align: center;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.about-contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 38px rgba(11, 29, 42, 0.09);
 }
 
 .about-contact-card > svg {
     flex-shrink: 0;
-    color: #a78643;
+
+    width: 25px;
+    height: 25px;
+
+    margin-bottom: 2px;
+
+    color: #a6813e;
+    stroke-width: 1.8;
 }
 
 .about-contact-card h3 {
-    margin: 0 0 7px;
+    margin: 0;
+
     color: var(--about-navy);
-    font-size: 14px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
 }
 
 .about-contact-card p {
     margin: 0;
-    color: var(--about-muted);
-    font-size: 13px;
-    line-height: 1.8;
+
+    color: #73777d;
+    font-size: 14px;
+    line-height: 1.6;
+
     overflow-wrap: anywhere;
 }
 
-.about-reviews-section {
-    width: min(1120px, calc(100% - 40px));
-    margin: 0 auto;
-    padding: 80px 0;
+.about-contact-card .contact-value {
+    color: var(--about-navy);
+    font-size: 17px;
+    font-weight: 650;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
 }
 
+/* Contact Links */
+
+.about-contact-card a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: auto;
+    max-width: 100%;
+    min-height: 43px;
+
+    margin: 3px 5px 0;
+    padding: 10px 18px;
+
+    border: 1px solid var(--about-navy);
+    border-radius: 13px;
+
+    background: var(--about-navy);
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+
+    box-shadow: 0 5px 12px rgba(11, 29, 42, 0.10);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.about-contact-card a:hover {
+    background: #20394b;
+    transform: translateY(-2px);
+}
+
+.about-contact-card a.whatsapp-button {
+    border-color: #a6813e;
+    background: #a6813e;
+    color: #fff;
+}
+
+.about-contact-card a.whatsapp-button:hover {
+    background: #8e6c31;
+}
+
+.about-contact-card .contact-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* =========================
+   Review Form
+   ========================= */
+
 .about-review-form-card {
+    width: 100%;
     max-width: 760px;
+
     margin: 0 auto 35px;
     padding: 30px;
+
     border: 1px solid var(--about-border);
     border-radius: 15px;
+
     background: #fff;
+
     box-shadow: 0 12px 35px rgba(11, 29, 42, 0.055);
 }
 
@@ -313,8 +533,10 @@
     display: flex;
     align-items: center;
     gap: 15px;
+
     margin-bottom: 25px;
     padding-bottom: 20px;
+
     border-bottom: 1px solid #eee8de;
 }
 
@@ -325,12 +547,14 @@
 
 .about-review-form-heading h3 {
     margin: 0 0 5px;
+
     color: var(--about-navy);
     font-size: 18px;
 }
 
 .about-review-form-heading p {
     margin: 0;
+
     color: var(--about-muted);
     font-size: 13px;
     line-height: 1.7;
@@ -343,6 +567,7 @@
 
 .about-review-form > label {
     margin-top: 7px;
+
     color: var(--about-navy);
     font-size: 13px;
     font-weight: 600;
@@ -352,11 +577,15 @@
 .about-review-form select {
     width: 100%;
     min-width: 0;
+
     padding: 14px;
+
     border: 1px solid #ded8cc;
     border-radius: 9px;
+
     background: var(--about-cream);
     color: var(--about-text);
+
     font-size: 14px;
 }
 
@@ -369,17 +598,22 @@
     color: #92989c;
 }
 
+/* Star Picker */
+
 .about-star-picker {
     display: flex;
     align-items: center;
     gap: 5px;
+
     margin: 1px 0 8px;
 }
 
 .about-star-picker button {
     display: grid;
     place-items: center;
+
     padding: 4px;
+
     border: 0;
     background: transparent;
     color: #d0c9bb;
@@ -394,6 +628,8 @@
     margin-top: 9px;
 }
 
+/* Login Prompt */
+
 .about-login-prompt {
     padding: 10px 0 0;
 }
@@ -404,16 +640,26 @@
     line-height: 1.8;
 }
 
+/* Feedback Message */
+
 .about-feedback-message {
     margin: 17px 0 0;
     padding: 12px 14px;
+
     border-radius: 8px;
+
     background: #f5efdf;
     color: #6e572d;
+
     font-size: 13px;
     line-height: 1.7;
+
     overflow-wrap: anywhere;
 }
+
+/* =========================
+   Reviews Grid
+   ========================= */
 
 .about-reviews-grid {
     display: grid;
@@ -424,9 +670,12 @@
 .about-review-card {
     min-width: 0;
     padding: 25px;
+
     border: 1px solid var(--about-border);
     border-radius: 13px;
+
     background: #fff;
+
     box-shadow: 0 8px 24px rgba(11, 29, 42, 0.035);
 }
 
@@ -440,11 +689,15 @@
     display: grid;
     place-items: center;
     flex-shrink: 0;
+
     width: 43px;
     height: 43px;
+
     border-radius: 50%;
+
     background: var(--about-navy);
     color: var(--about-gold);
+
     font-family: "Playfair Display", Georgia, serif;
     font-size: 20px;
 }
@@ -455,8 +708,10 @@
 
 .about-review-author h3 {
     margin: 0 0 4px;
+
     color: var(--about-navy);
     font-size: 15px;
+
     overflow-wrap: anywhere;
 }
 
@@ -465,8 +720,11 @@
     font-size: 11px;
 }
 
+/* Review Stars */
+
 .about-review-stars {
     margin: 19px 0 12px;
+
     color: #c49a47;
     font-size: 19px;
     letter-spacing: 3px;
@@ -476,20 +734,28 @@
     color: #d8d2c7;
 }
 
+/* Review Text */
+
 .about-review-text {
     margin: 0;
+
     color: #5f6971;
     font-size: 13px;
     line-height: 1.9;
+
     white-space: pre-line;
     overflow-wrap: anywhere;
 }
 
+/* Admin Reply */
+
 .about-admin-reply {
     margin-top: 18px;
     padding: 14px;
+
     border-left: 3px solid var(--about-gold);
     border-radius: 0 8px 8px 0;
+
     background: var(--about-cream);
 }
 
@@ -500,9 +766,11 @@
 
 .about-admin-reply p {
     margin: 7px 0 0;
+
     color: var(--about-muted);
     font-size: 13px;
     line-height: 1.8;
+
     white-space: pre-line;
     overflow-wrap: anywhere;
 }
@@ -518,8 +786,8 @@
 
 .about-review-actions button {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 7px;
     min-height: 36px;
     padding: 8px 12px;
@@ -527,6 +795,7 @@
     border-radius: 7px;
     background: transparent;
     color: var(--about-navy);
+
     font-size: 12px;
     font-weight: 600;
 }
@@ -544,24 +813,39 @@
     background: #fbefef;
 }
 
+/* Empty Reviews */
+
 .about-empty-reviews {
     grid-column: 1 / -1;
+
     padding: 30px;
+
     border: 1px dashed #d8d0c1;
     border-radius: 12px;
+
     color: var(--about-muted);
     font-size: 14px;
     line-height: 1.8;
+
     text-align: center;
 }
 
+/* =========================
+   Edit Panel
+   ========================= */
+
 .about-edit-panel {
+    width: 100%;
     max-width: 760px;
+
     margin: 28px auto 0;
     padding: 26px;
+
     border: 1px solid var(--about-border);
     border-radius: 13px;
+
     background: #fff;
+
     box-shadow: 0 10px 30px rgba(11, 29, 42, 0.05);
 }
 
@@ -570,12 +854,15 @@
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+
     margin-bottom: 18px;
 }
 
 .about-edit-heading h3 {
     margin: 0;
+
     color: var(--about-navy);
+
     font-family: "Playfair Display", Georgia, serif;
     font-size: 23px;
 }
@@ -583,10 +870,13 @@
 .about-edit-heading > button {
     display: grid;
     place-items: center;
+
     width: 36px;
     height: 36px;
+
     border: 1px solid var(--about-border);
     border-radius: 8px;
+
     background: transparent;
     color: var(--about-navy);
 }
@@ -595,12 +885,137 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+
     margin-top: 10px;
+}
+
+/* Inline Editing */
+
+.about-inline-edit {
+    display: grid;
+    gap: 12px;
+
+    width: 100%;
+    margin-top: 18px;
+}
+
+.about-inline-edit label {
+    margin-top: 3px;
+
+    color: #253441;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.about-inline-edit select,
+.about-inline-edit textarea {
+    width: 100%;
+    min-width: 0;
+
+    padding: 10px 12px;
+
+    border: 1px solid #e2dbcf;
+    border-radius: 8px;
+
+    background: #fff;
+    color: #253441;
+
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.about-inline-edit select:focus,
+.about-inline-edit textarea:focus {
+    outline: none;
+
+    border-color: #b99a5d;
+
+    box-shadow: 0 0 0 3px rgba(185, 154, 93, 0.12);
+}
+
+.about-inline-edit textarea {
+    min-height: 95px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* Inline Edit Inside Review Card */
+
+.about-review-card .about-inline-edit {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    max-width: 420px;
+
+    margin: 20px auto 8px;
+    padding: 18px;
+
+    border: 1px solid #eee6d8;
+    border-radius: 13px;
+
+    background: #fcfaf6;
+
+    box-shadow: 0 4px 14px rgba(11, 29, 42, 0.04);
+}
+
+.about-inline-edit .about-edit-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 6px;
+}
+
+.about-inline-edit .about-edit-actions button {
+    min-height: 36px;
+    padding: 8px 13px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.about-inline-edit .about-edit-actions .about-primary-button {
+    border: 1px solid var(--about-navy);
+
+    background: var(--about-navy);
+    color: #fff;
+}
+
+.about-inline-edit .about-edit-actions .about-primary-button:hover {
+    background: #20394a;
+}
+
+.about-inline-edit .about-edit-actions .about-outline-button {
+    border: 1px solid #d8cbb5;
+
+    background: transparent;
+    color: #253441;
+}
+
+.about-inline-edit .about-edit-actions .about-outline-button:hover {
+    background: #f3ebdc;
+}
+
+.about-page > .about-hero,
+.about-page > .about-contact-section {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 @media (max-width: 900px) {
     .about-hero {
-        grid-template-columns: 1fr 0.65fr;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.65fr);
         gap: 20px;
         padding: 65px 5%;
     }
@@ -615,7 +1030,7 @@
     }
 
     .about-contact-section {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 25px;
         padding: 55px 5%;
     }
@@ -623,7 +1038,8 @@
 
 @media (max-width: 600px) {
     .about-hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+
         padding: 55px 22px;
     }
 
@@ -643,6 +1059,7 @@
     .about-hero-icon {
         width: 125px;
         height: 125px;
+
         box-shadow: none;
     }
 
@@ -658,7 +1075,7 @@
     }
 
     .about-services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 13px;
     }
 
@@ -681,7 +1098,7 @@
     }
 
     .about-reviews-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .about-review-form > .about-primary-button {
@@ -695,408 +1112,11 @@
     .about-edit-actions button {
         width: 100%;
     }
-}
 
-/* Zentrale Ausrichtung für die gesamte About-Seite */
-.about-page {
-    width: 100%;
-    text-align: center;
-    overflow-wrap: anywhere;
-}
-
-.about-page .about-hero,
-.about-page .about-section,
-.about-page .about-contact-section,
-.about-page .about-reviews-section {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.about-page .about-hero-content,
-.about-page .about-section-heading,
-.about-page .about-intro,
-.about-page .about-contact-copy {
-    width: 100%;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.about-page .about-hero-content h1,
-.about-page .about-hero-content p,
-.about-page .about-section h2,
-.about-page .about-section p,
-.about-page .about-contact-copy h2,
-.about-page .about-contact-copy p {
-    text-align: center;
-}
-
-.about-page .about-hero-decoration {
-    margin: 35px auto 0;
-    align-items: center;
-    text-align: center;
-}
-
-/* Service-Karten */
-.about-page .about-services-grid {
-    width: 100%;
-    max-width: 1050px;
-    margin: 35px auto 0;
-    justify-content: center;
-}
-
-.about-page .about-service-card {
-    text-align: center;
-    align-items: center;
-}
-
-.about-page .about-service-icon {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Kontaktkarten: Icon und Text gemeinsam mittig */
-.about-page .about-contact-cards {
-    width: 100%;
-    max-width: 760px;
-    margin: 30px auto 0;
-}
-
-.about-page .about-contact-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    text-align: center;
-}
-
-.about-page .about-contact-card h3,
-.about-page .about-contact-card p {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-/* Bewertungsformular */
-.about-page .about-review-form-card {
-    width: 100%;
-    max-width: 900px;
-    margin: 35px auto;
-    text-align: center;
-}
-
-.about-page .about-review-form-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: center;
-}
-
-.about-page .about-review-form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-    text-align: center;
-}
-
-.about-page .about-review-form label {
-    width: 100%;
-    text-align: center;
-}
-
-.about-page .about-star-picker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-}
-
-.about-page .about-review-form textarea,
-.about-page .about-review-form select {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    box-sizing: border-box;
-    text-align: left;
-}
-
-.about-page .about-review-form > button {
-    align-self: center;
-    margin: 8px auto 0;
-}
-
-.about-page .about-login-prompt {
-    text-align: center;
-}
-
-.about-page .about-login-prompt button {
-    display: block;
-    margin: 18px auto 0;
-}
-
-.about-page .about-feedback-message {
-    text-align: center;
-}
-
-/* Kundenbewertungen */
-.about-page .about-reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    width: 100%;
-    max-width: 1050px;
-    margin: 35px auto 0;
-    text-align: center;
-}
-
-.about-page .about-review-card {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.about-page .about-review-card-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: center;
-}
-
-.about-page .about-review-author,
-.about-page .about-review-author h3,
-.about-page .about-review-author span,
-.about-page .about-review-text {
-    width: 100%;
-    text-align: center;
-}
-
-.about-page .about-review-stars {
-    text-align: center;
-    margin: 12px auto;
-}
-
-.about-page .about-admin-reply {
-    width: 100%;
-    text-align: center;
-}
-
-.about-page .about-review-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
-    margin: 18px auto 0;
-}
-
-.about-page .about-empty-reviews {
-    grid-column: 1 / -1;
-    text-align: center;
-}
-
-/* Bearbeitungsformular */
-.about-page .about-edit-panel {
-    width: 100%;
-    max-width: 700px;
-    margin: 30px auto;
-    text-align: center;
-}
-
-.about-page .about-edit-heading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    text-align: center;
-}
-
-.about-page .about-edit-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-}
-
-.about-page .about-edit-actions button {
-    margin: 0;
-}
-
-@media (max-width: 650px) {
-    .about-page .about-reviews-grid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .about-page .about-contact-card {
-        padding: 22px 16px;
-    }
-
-    .about-page .about-review-form-card {
-        padding: 22px 16px;
-        box-sizing: border-box;
-    }
-
-    .about-page .about-review-actions,
-    .about-page .about-edit-actions {
-        justify-content: center;
-    }
-}
-
-/* ===== Premium Contact Cards ===== */
-
-.about-contact-card {
-    width: 100%;
-    max-width: 810px;
-    margin: 0 auto 28px;
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-
-    background: rgba(255, 253, 248, 0.92);
-    border: 1px solid #e8c98f;
-    border-radius: 25px;
-    box-shadow: 0 12px 35px rgba(11, 29, 42, 0.055);
-
-    color: #0b1d2a;
-    font-family: "Segoe UI", Arial, sans-serif;
-    text-align: center;
-    box-sizing: border-box;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.about-contact-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 38px rgba(11, 29, 42, 0.09);
-}
-
-/* Gold icon */
-.about-contact-card > svg {
-    width: 25px;
-    height: 25px;
-    color: #a6813e;
-    stroke-width: 1.8;
-    margin-bottom: 2px;
-}
-
-.about-contact-card h3 {
-    margin: 0;
-    color: #0b1d2a;
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 21px;
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: -0.3px;
-}
-
-.about-contact-card p {
-    margin: 0;
-    color: #73777d;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.8;
-    overflow-wrap: anywhere;
-}
-
-.about-contact-card .contact-value {
-    color: #0b1d2a;
-    font-size: 19px;
-    font-weight: 650;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
-}
-
-/* Phone and WhatsApp buttons */
-.about-contact-card a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    width: auto;
-    min-height: 48px;
-    margin: 8px 5px 0;
-    padding: 12px 23px;
-
-    border: 1px solid #0b1d2a;
-    border-radius: 13px;
-    background: #0b1d2a;
-    color: #ffffff;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.4;
-    text-decoration: none;
-
-    box-shadow: 0 5px 12px rgba(11, 29, 42, 0.10);
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.about-contact-card a:hover {
-    background: #20394b;
-    transform: translateY(-2px);
-}
-
-/* Optional gold WhatsApp button */
-.about-contact-card a.whatsapp-button {
-    border-color: #a6813e;
-    background: #a6813e;
-    color: #ffffff;
-}
-
-.about-contact-card a.whatsapp-button:hover {
-    background: #8e6c31;
-}
-
-/* Keep multiple buttons side by side */
-.about-contact-card .contact-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    margin-top: 4px;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
     .about-contact-card {
-        padding: 25px 17px;
-        margin-bottom: 18px;
+        padding: 20px 16px;
+        margin-bottom: 15px;
         border-radius: 19px;
-        gap: 10px;
-    }
-
-    .about-contact-card h3 {
-        font-size: 19px;
-    }
-
-    .about-contact-card p {
-        font-size: 14px;
-    }
-
-    .about-contact-card .contact-value {
-        font-size: 16px;
     }
 
     .about-contact-card .contact-buttons {
@@ -1111,189 +1131,7 @@
         padding: 10px 16px;
         font-size: 14px;
     }
-}
 
-/* Slightly smaller contact cards */
-.about-contact-card {
-    max-width: 680px;
-    padding: 24px 24px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    gap: 9px;
-}
-
-.about-contact-card h3 {
-    font-size: 19px;
-}
-
-.about-contact-card p {
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.about-contact-card .contact-value {
-    font-size: 17px;
-}
-
-.about-contact-card a {
-    min-height: 43px;
-    padding: 10px 18px;
-    font-size: 14px;
-}
-
-@media (max-width: 600px) {
-    .about-contact-card {
-        padding: 20px 16px;
-        margin-bottom: 15px;
-    }
-}
-
-.about-inline-edit {
-    display: grid;
-    gap: 12px;
-    width: 100%;
-    margin-top: 18px;
-}
-
-.about-inline-edit label {
-    color: #0b1d2a;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.about-inline-edit select,
-.about-inline-edit textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #ded6c7;
-    border-radius: 10px;
-    background: #faf7f1;
-    color: #202a32;
-    font: inherit;
-    box-sizing: border-box;
-}
-
-.about-inline-edit textarea {
-    resize: vertical;
-}
-
-.about-review-actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-}
-
-.about-review-actions button {
-    padding: 10px 16px;
-    border: 1px solid #0b1d2a;
-    border-radius: 8px;
-    background: #0b1d2a;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.about-review-actions button[type="button"] {
-    background: transparent;
-    color: #0b1d2a;
-}
-
-.about-review-actions button:hover {
-    opacity: 0.85;
-}
-
-/* Kompaktes und elegantes Bearbeitungsformular */
-.about-review-card .about-inline-edit {
-    width: 100%;
-    max-width: 420px;
-    margin: 20px auto 8px;
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 1px solid #eee6d8;
-    border-radius: 13px;
-    background: #fcfaf6;
-    box-shadow: 0 4px 14px rgba(11, 29, 42, 0.04);
-    box-sizing: border-box;
-}
-
-.about-inline-edit label {
-    margin-top: 3px;
-    color: #253441;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.about-inline-edit select,
-.about-inline-edit textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #e2dbcf;
-    border-radius: 8px;
-    background: #fff;
-    color: #253441;
-    font-family: "Inter", "Segoe UI", sans-serif;
-    font-size: 13px;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.about-inline-edit select:focus,
-.about-inline-edit textarea:focus {
-    outline: none;
-    border-color: #b99a5d;
-    box-shadow: 0 0 0 3px rgba(185, 154, 93, 0.12);
-}
-
-.about-inline-edit textarea {
-    min-height: 95px;
-    resize: vertical;
-    line-height: 1.6;
-}
-
-.about-inline-edit .about-edit-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 6px;
-}
-
-.about-inline-edit .about-edit-actions button {
-    min-height: 36px;
-    padding: 8px 13px;
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.about-inline-edit .about-edit-actions .about-primary-button {
-    border: 1px solid #0b1d2a;
-    background: #0b1d2a;
-    color: #fff;
-}
-
-.about-inline-edit .about-edit-actions .about-primary-button:hover {
-    background: #20394a;
-}
-
-.about-inline-edit .about-edit-actions .about-outline-button {
-    border: 1px solid #d8cbb5;
-    background: transparent;
-    color: #253441;
-}
-
-.about-inline-edit .about-edit-actions .about-outline-button:hover {
-    background: #f3ebdc;
-}
-
-@media (max-width: 480px) {
     .about-review-card .about-inline-edit {
         padding: 14px;
     }

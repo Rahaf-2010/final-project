@@ -40,7 +40,7 @@
     line-height: 1.8;
 }
 
-/* Suchbereich */
+/* Search panel */
 
 .cars-search-panel {
     max-width: 1250px;
@@ -89,10 +89,13 @@
     color: #a17d3d;
 }
 
+/* Search fields */
+
 .cars-filter-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    align-items: end;
+    gap: 22px 20px;
 }
 
 .cars-field {
@@ -145,14 +148,20 @@
     padding-left: 41px;
 }
 
-/* Kompakter Preisfilter */
+/* Price filter */
 
 .cars-price-filter {
-    margin-top: 20px;
+    grid-column: 2 / 4;
+    justify-self: center;
+    width: 100%;
+    max-width: 360px;
+    min-width: 0;
+    margin: 0;
     padding: 13px 16px 9px;
     border: 1px solid rgba(11, 29, 42, 0.05);
     border-radius: 12px;
     background: #f8f5ee;
+    box-sizing: border-box;
 }
 
 .cars-price-heading {
@@ -184,7 +193,7 @@
     font-weight: 600;
 }
 
-/* Kleiner, schmaler Preisregler */
+/* Price range slider */
 
 .cars-range-group {
     position: relative;
@@ -259,7 +268,7 @@
     font-size: 10px;
 }
 
-/* Suchbutton */
+/* Search button */
 
 .cars-search-button {
     display: inline-flex;
@@ -284,7 +293,7 @@
     background: #243e4e;
 }
 
-/* Fahrzeugergebnisse */
+/* Car results */
 
 .cars-results {
     max-width: 1250px;
@@ -318,8 +327,8 @@
 .cars-gallery {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
     align-items: stretch;
+    gap: 25px;
 }
 
 .cars-card {
@@ -467,6 +476,8 @@
     background: #243e4e;
 }
 
+/* Loading, error and empty states */
+
 .cars-status,
 .cars-empty {
     padding: 40px 20px;
@@ -508,6 +519,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .cars-price-filter {
+        grid-column: 1 / -1;
+    }
+
     .cars-gallery {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 18px;
@@ -545,8 +560,8 @@
     }
 
     .cars-price-filter {
+        grid-column: 1;
         padding: 12px 12px 9px;
-        margin-top: 16px;
     }
 
     .cars-price-heading strong {
@@ -576,45 +591,3 @@
         padding: 18px;
     }
 }
-
-
-
-/* Filterfelder einheitlich anordnen */
-.cars-filter-grid {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-gap: 22px 20px;
-align-items: end;
-}
-
-/* Preisfilter über zwei Spalten */
-.cars-price-filter {
-grid-column: 2/3;
-justify-self: center;
-width: 200%;
-height: 16vh;
-min-width: 0;
-max-width: 360px;
-box-sizing: border-box;
-margin: 0;
-padding: 14px 18px;
-align-self: end;
-}
-
-@media (max-width: 760px) {
-.cars-filter-grid {
-grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.cars-price-filter {
-    grid-column: 1 / -1;
-}
-
-}
-
-@media (max-width: 480px) {
-.cars-filter-grid {
-grid-template-columns: 1fr;
-}
-}
-

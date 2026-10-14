@@ -93,7 +93,7 @@ function SellRequest() {
                 </p>
             </div>
             {!token ?(
-                <div>
+                <div className="sell-request-login">
                     <p>Bitte melden Sie sich an, um eine Verkaufsanfrage zu stellen.</p>
                     <button
                         type="button"
