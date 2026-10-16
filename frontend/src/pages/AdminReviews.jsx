@@ -1,12 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-    Star,
-    Trash2,
-    Pencil,
-    X,
-    Send,
-    MessageCircle,
-} from "lucide-react";
+import { Star, Trash2, Pencil, X, Send, MessageCircle,} from "lucide-react";
 
 import api from "../services/api";
 import "./AdminReviews.css";

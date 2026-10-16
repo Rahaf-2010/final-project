@@ -1,20 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-    Check,
-    Clock,
-    X,
-    Trash2,
-    ChevronLeft,
-    ChevronRight,
-    Phone,
-    MapPin,
-    UserRound,
-    CarFront,
-    CalendarDays,
-    Gauge,
-    Euro,
-    Image as ImageIcon,
-} from "lucide-react";
+import { Check, Clock, X, Trash2, ChevronLeft, ChevronRight, Phone, MapPin, UserRound, CarFront, CalendarDays, Gauge, Euro, Image as ImageIcon,} from "lucide-react";
 
 import api from "../services/api";
 import "./AdminSellRequest.css";
@@ -29,7 +14,6 @@ function AdminSellRequest() {
     const [deletingId, setDeletingId] = useState(null);
     const [lightbox, setLightbox] = useState(null);
 
-    // Load requests
     useEffect(() => {
         let cancelled = false;
 
@@ -75,7 +59,6 @@ function AdminSellRequest() {
         };
     }, []);
 
-    // Change request status
     const handleStatusChange = async (id, status) => {
         try {
             setUpdatingId(id);
@@ -123,7 +106,6 @@ function AdminSellRequest() {
         }
     };
 
-    // Delete request
     const handleDelete = async (id) => {
         const confirmed = window.confirm(
             "Möchten Sie diese Verkaufsanfrage wirklich löschen?"
@@ -175,7 +157,6 @@ function AdminSellRequest() {
         }
     };
 
-    // Image helpers
     const getImageUrl = (image) => {
         if (!image) return "";
 
@@ -216,7 +197,7 @@ function AdminSellRequest() {
         });
     };
 
-    // Keyboard controls for the image viewer
+    // Keyboard controls for the imagees
     useEffect(() => {
         if (!lightbox) return;
 
@@ -368,7 +349,7 @@ function AdminSellRequest() {
                                 className="admin-sell-card"
                                 key={request._id}
                             >
-                                {/* Card header */}
+
                                 <div className="admin-sell-card-header">
                                     <div>
                                         <span className="admin-sell-card-label">
@@ -394,7 +375,6 @@ function AdminSellRequest() {
                                     </span>
                                 </div>
 
-                                {/* Customer information */}
                                 <section className="admin-sell-section">
                                     <h3>
                                         <UserRound size={17} />
@@ -443,7 +423,6 @@ function AdminSellRequest() {
                                     </div>
                                 </section>
 
-                                {/* Vehicle information */}
                                 <section className="admin-sell-section">
                                     <h3>
                                         <CarFront size={17} />
@@ -503,7 +482,6 @@ function AdminSellRequest() {
                                     </div>
                                 </section>
 
-                                {/* Additional information */}
                                 {request.additionalInfo && (
                                     <section className="admin-sell-section">
                                         <h3>
@@ -567,7 +545,6 @@ function AdminSellRequest() {
                                     )}
                                 </section>
 
-                                {/* Actions */}
                                 <section className="admin-sell-actions-section">
                                     <h3>Bearbeitungsstatus</h3>
 
@@ -652,7 +629,7 @@ function AdminSellRequest() {
                 </section>
             )}
 
-            {/* Full-screen image viewer */}
+            {/* full screen image*/}
             {lightbox &&
                 selectedRequest &&
                 selectedImages.length > 0 && (

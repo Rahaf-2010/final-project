@@ -1,7 +1,4 @@
-/* =========================
-   ISSA Automobile — About Page
-   Clean stylesheet, without duplicate selectors
-   ========================= */
+/* ISSA Automobile — About Page*/
 
 .about-page {
     --about-navy: #0b1d2a;
@@ -47,9 +44,7 @@
     outline-offset: 3px;
 }
 
-/* =========================
-   Eyebrow
-   ========================= */
+/* Eyebrow*/
 
 .about-eyebrow {
     display: inline-block;
@@ -60,9 +55,7 @@
     line-height: 1.8;
 }
 
-/* =========================
-   Hero Section
-   ========================= */
+/* Hero Section*/
 
 .about-hero {
     display: grid;
@@ -121,9 +114,7 @@
     line-height: 1.9;
 }
 
-/* =========================
-   Buttons
-   ========================= */
+/* Buttons*/
 
 .about-primary-button,
 .about-outline-button {
@@ -177,9 +168,7 @@
     color: var(--about-navy);
 }
 
-/* =========================
-   Hero Decoration
-   ========================= */
+/* Hero Decoration*/
 
 .about-hero-decoration {
     display: flex;
@@ -223,9 +212,7 @@
     text-align: center;
 }
 
-/* =========================
-   General Sections
-   ========================= */
+/* General Sections*/
 
 .about-section,
 .about-reviews-section {
@@ -271,9 +258,7 @@
     max-width: 620px;
 }
 
-/* =========================
-   Services Grid
-   ========================= */
+/* Services Grid*/
 
 .about-services-grid {
     display: grid;
@@ -334,10 +319,7 @@
     line-height: 1.9;
 }
 
-/* =========================
-   Contact Section
-   Full Width
-   ========================= */
+/* Contact Section Full Width*/ 
 
 .about-contact-section {
     display: grid;
@@ -366,9 +348,7 @@
     line-height: 1.9;
 }
 
-/* =========================
-   Contact Cards
-   ========================= */
+/* Contact Cards*/
 
 .about-contact-cards {
     display: grid;
@@ -451,7 +431,7 @@
     overflow-wrap: anywhere;
 }
 
-/* Contact Links */
+/* Contact Links*/
 
 .about-contact-card a {
     display: inline-flex;
@@ -510,9 +490,7 @@
     margin-top: 4px;
 }
 
-/* =========================
-   Review Form
-   ========================= */
+/* Review Form*/
 
 .about-review-form-card {
     width: 100%;
@@ -657,9 +635,7 @@
     overflow-wrap: anywhere;
 }
 
-/* =========================
-   Reviews Grid
-   ========================= */
+/* Reviews Grid*/
 
 .about-reviews-grid {
     display: grid;
@@ -830,9 +806,7 @@
     text-align: center;
 }
 
-/* =========================
-   Edit Panel
-   ========================= */
+/* Edit Panel*/
 
 .about-edit-panel {
     width: 100%;

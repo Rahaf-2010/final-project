@@ -1,4 +1,4 @@
-/* ===== ISSA AUTOMOBILE - CAR SEARCH & GALLERY ===== */
+/* ISSA AUTOMOBILE - CAR SEARCH & GALLERY */
 
 .cars-page {
     min-height: 100vh;
@@ -332,8 +332,11 @@
 }
 
 .cars-card {
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     overflow: hidden;
+    box-sizing: border-box;
     border: 1px solid rgba(11, 29, 42, 0.09);
     border-radius: 14px;
     background: #fff;
@@ -398,7 +401,10 @@
 }
 
 .cars-card-content {
+    display: flex;
+    flex-direction: column;
     padding: 21px;
+    flex: 1;
 }
 
 .cars-offer-number {
@@ -452,7 +458,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-top: 17px;
+    margin-top: auto;
+    padding-top: 17px;
 }
 
 .cars-card-footer > span {

@@ -185,8 +185,7 @@ function Register() {
             </form>
 
             {message && <p>{message}</p>}
-        </div>
-    );
+                </div>
         </>
     );
 }

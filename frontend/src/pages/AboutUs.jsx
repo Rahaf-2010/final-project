@@ -1,19 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-    ShieldCheck,
-    CarFront,
-    Handshake,
-    BadgeCheck,
-    MapPin,
-    Phone,
-    Mail,
-    Star,
-    MessageSquare,
-    Pencil,
-    Trash2,
-    Send,
-} from "lucide-react";
+import {ShieldCheck,CarFront, Handshake, BadgeCheck, MapPin, Phone, Mail, Star, MessageSquare, Pencil, Trash2, Send} from "lucide-react";
 import api from "../services/api";
 import "./AboutUs.css";
 
@@ -61,7 +48,7 @@ const AboutUs = () => {
         };
     }, []);
 
-    // Neue Bewertung absenden
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -74,7 +61,6 @@ const AboutUs = () => {
 
         try {
             const token = localStorage.getItem("token");
-
             const response = await api.post(
                 "/reviews",
                 {
@@ -106,7 +92,6 @@ const AboutUs = () => {
         }
     };
 
-    // Bewertung innerhalb der Karte bearbeiten
     const handleUpdateReview = async (e) => {
         e.preventDefault();
 
@@ -158,7 +143,6 @@ const AboutUs = () => {
         }
     };
 
-    // Eigene Bewertung löschen
     const handleDeleteReview = async (id) => {
         const confirmed = window.confirm(
             "Möchten Sie diese Bewertung wirklich löschen?"
@@ -197,7 +181,7 @@ const AboutUs = () => {
 
     return (
         <main className="about-page">
-            {/* Hero-Bereich */}
+
             <section className="about-hero">
                 <div className="about-hero-content">
                     <span className="about-eyebrow">
@@ -233,7 +217,6 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Über uns */}
             <section className="about-section about-intro">
                 <span className="about-eyebrow">DAS SIND WIR</span>
 
@@ -247,7 +230,6 @@ const AboutUs = () => {
                 </p>
             </section>
 
-            {/* Dienstleistungen */}
             <section className="about-section">
                 <div className="about-section-heading">
                     <span className="about-eyebrow">
@@ -304,7 +286,7 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Kontakt */}
+
             <section className="about-contact-section">
                 <div className="about-contact-copy">
                     <span className="about-eyebrow">
@@ -382,7 +364,6 @@ const AboutUs = () => {
                 </div>
             </section>
 
-            {/* Bewertungen */}
             <section className="about-reviews-section">
                 <div className="about-section-heading">
                     <span className="about-eyebrow">

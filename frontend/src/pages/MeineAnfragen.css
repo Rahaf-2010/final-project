@@ -1,9 +1,11 @@
-/* =========================================
+/* =========================
    MEINE ANFRAGEN — PAGE
-   ========================================= */
+   ========================= */
 
 .meine-anfragen-page {
+    width: 100%;
     min-height: 100vh;
+    min-width: 0;
     padding: 55px 20px 80px;
     box-sizing: border-box;
     background: #faf7f1;
@@ -17,6 +19,23 @@
     box-sizing: border-box;
 }
 
+.meine-anfragen-page button,
+.meine-anfragen-page input,
+.meine-anfragen-page textarea {
+    font: inherit;
+}
+
+.meine-anfragen-page button {
+    cursor: pointer;
+}
+
+.meine-anfragen-page button:focus-visible,
+.meine-anfragen-page input:focus-visible,
+.meine-anfragen-page textarea:focus-visible {
+    outline: 2px solid #b49350;
+    outline-offset: 3px;
+}
+
 .meine-anfragen-page > h1 {
     margin: 0 0 35px;
     color: #0b1d2a;
@@ -25,27 +44,32 @@
     text-align: center;
 }
 
-.meine-anfragen-page > ul {
+.meine-anfragen-page > .requests-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 520px));
     justify-content: center;
     gap: 28px;
+    width: 100%;
     max-width: 1150px;
     margin: 0 auto;
     padding: 0;
     list-style: none;
 }
 
-.meine-anfragen-page > ul > li.request-card {
+.meine-anfragen-page > .requests-list > .request-card {
+    width: 100%;
     min-width: 0;
+    max-width: 100%;
+    margin: 0;
     padding: 26px;
     border: 1px solid #e8e0d2;
     border-radius: 18px;
     background: #fff;
     box-shadow: 0 12px 35px rgba(11, 29, 42, 0.07);
+    overflow-wrap: anywhere;
 }
 
-/* ---------- REQUEST HEADER ---------- */
+/* REQUEST HEADER */
 
 .meine-anfragen-page .request-card-header {
     display: flex;
@@ -56,7 +80,7 @@
     border-bottom: 1px solid #eeeae2;
 }
 
-.request-eyebrow {
+.meine-anfragen-page .request-eyebrow {
     color: #a78643;
     font-size: 10px;
     font-weight: 700;
@@ -71,7 +95,7 @@
     overflow-wrap: anywhere;
 }
 
-.request-status {
+.meine-anfragen-page .request-status {
     flex-shrink: 0;
     max-width: 48%;
     padding: 8px 11px;
@@ -83,16 +107,16 @@
     overflow-wrap: anywhere;
 }
 
-/* ---------- VEHICLE SPECIFICATIONS ---------- */
+/* VEHICLE SPECIFICATIONS */
 
-.request-specs {
+.meine-anfragen-page .request-specs {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
     margin-top: 20px;
 }
 
-.request-spec {
+.meine-anfragen-page .request-spec {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -104,27 +128,29 @@
     background: #faf7f1;
 }
 
-.request-spec span {
+.meine-anfragen-page .request-spec span {
     color: #7b838a;
     font-size: 12px;
 }
 
-.request-spec strong {
+.meine-anfragen-page .request-spec strong {
     color: #0b1d2a;
     font-size: 14px;
     overflow-wrap: anywhere;
 }
 
-.request-spec.request-price strong {
+.meine-anfragen-page .request-spec.request-price strong {
     color: #9a783d;
     font-size: 19px;
 }
 
-/* ---------- CONTACT, DESCRIPTION AND IMAGES ---------- */
+/* CONTACT, DESCRIPTION AND IMAGES */
 
-.request-contact,
-.request-description,
-.request-images {
+.meine-anfragen-page .request-contact,
+.meine-anfragen-page .request-description,
+.meine-anfragen-page .request-images {
+    min-width: 0;
+    max-width: 100%;
     margin-top: 22px;
 }
 
@@ -166,15 +192,18 @@
     overflow-wrap: anywhere;
 }
 
-.request-images-grid {
+.meine-anfragen-page .request-images-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
+    width: 100%;
+    min-width: 0;
 }
 
 .meine-anfragen-page .request-images-grid img {
     display: block;
     width: 100%;
+    min-width: 0;
     height: 105px;
     margin: 0;
     border-radius: 9px;
@@ -182,23 +211,25 @@
     background: #f0ede7;
 }
 
-/* ---------- REQUEST ACTIONS ---------- */
+/* REQUEST CARD ACTIONS */
 
-.meine-anfragen-page .request-card .request-actions {
+.meine-anfragen-page .request-card > .request-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 12px;
     width: 100%;
-    margin: 22px auto 0;
+    min-width: 0;
+    margin: 22px 0 0;
 }
 
-.meine-anfragen-page .request-card .request-actions button {
+.meine-anfragen-page .request-card > .request-actions > button {
     position: static;
-    flex: 0 0 auto;
+    flex: 0 1 auto;
     width: auto;
-    min-width: 125px;
+    min-width: 0;
+    max-width: 100%;
     min-height: 42px;
     margin: 0;
     padding: 10px 18px;
@@ -208,60 +239,26 @@
     color: #fff;
     font-size: 13px;
     font-weight: 600;
-    cursor: pointer;
+    box-shadow: none;
+    transform: none;
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.meine-anfragen-page .request-card .request-actions .request-edit-button:hover {
+.meine-anfragen-page .request-card > .request-actions > .request-edit-button:hover {
     background: #213b4d;
 }
 
-.meine-anfragen-page .request-card .request-actions .request-delete-button {
+.meine-anfragen-page .request-card > .request-actions > .request-delete-button {
     border-color: #b49350;
     background: transparent;
     color: #0b1d2a;
 }
 
-.meine-anfragen-page .request-card .request-actions .request-delete-button:hover {
+.meine-anfragen-page .request-card > .request-actions > .request-delete-button:hover {
     background: #f3ebdc;
 }
 
-/* ---------- EDIT PANEL ---------- */
-
-.meine-anfragen-page .request-edit-panel {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    margin: 28px 0 0;
-    padding: 24px;
-    border: 1px solid #e8e0d2;
-    border-radius: 16px;
-    background: #fff;
-    box-shadow: 0 8px 24px rgba(11, 29, 42, 0.05);
-}
-
-.meine-anfragen-page .request-edit-panel h2 {
-    margin: 0 0 20px;
-    color: #0b1d2a;
-    font-family: "Playfair Display", Georgia, serif;
-    font-size: 25px;
-}
-
-.meine-anfragen-page .request-current-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 22px;
-}
-
-.meine-anfragen-page .request-current-images img {
-    width: 100px;
-    height: 80px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-/* ---------- EDIT FORM ---------- */
+/* EDIT FORM */
 
 .meine-anfragen-page .request-edit-form {
     display: grid;
@@ -269,7 +266,18 @@
     gap: 14px;
     width: 100%;
     min-width: 0;
+    max-width: 100%;
     margin: 0;
+}
+
+.meine-anfragen-page .request-edit-form > label {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    color: #0b1d2a;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .meine-anfragen-page .request-edit-form input:not([type="file"]),
@@ -278,13 +286,12 @@
     width: 100%;
     min-width: 0;
     max-width: 100%;
-    margin: 0;
+    margin: 8px 0 0;
     padding: 13px 14px;
     border: 1px solid #ded8cc;
     border-radius: 9px;
     background: #faf7f1;
     color: #202a32;
-    font: inherit;
 }
 
 .meine-anfragen-page .request-edit-form input:focus,
@@ -293,9 +300,10 @@
     outline: 2px solid rgba(180, 147, 80, 0.18);
 }
 
-.meine-anfragen-page .request-edit-form textarea,
-.meine-anfragen-page .request-edit-form .request-file-label,
-.meine-anfragen-page .request-edit-form .request-actions {
+.meine-anfragen-page .request-edit-form > .request-textarea-label,
+.meine-anfragen-page .request-edit-form > .request-file-label,
+.meine-anfragen-page .request-edit-form > .request-selected-files,
+.meine-anfragen-page .request-edit-form > .request-actions {
     grid-column: 1 / -1;
 }
 
@@ -304,7 +312,7 @@
     resize: vertical;
 }
 
-.meine-anfragen-page .request-file-label {
+.meine-anfragen-page .request-edit-form > .request-file-label {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -315,83 +323,99 @@
 }
 
 .meine-anfragen-page .request-edit-form input[type="file"] {
+    display: block;
     width: 100%;
-    max-width: 100%;
     min-width: 0;
+    max-width: 100%;
+    margin: 0;
     padding: 10px;
     border: 1px solid #ded8cc;
     border-radius: 9px;
     background: #faf7f1;
+    color: #202a32;
     font-size: 13px;
 }
 
-/* ---------- EDIT FORM ACTION BUTTONS ---------- */
+.meine-anfragen-page .request-selected-files {
+    min-width: 0;
+    margin: 0;
+    color: #59636b;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
 
-.meine-anfragen-page .request-edit-form .request-actions {
+.meine-anfragen-page .request-edit-form > .request-actions {
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    margin-top: 12px;
+    min-width: 0;
+    margin: 12px 0 0;
 }
 
-.meine-anfragen-page .request-edit-form .request-actions button {
+.meine-anfragen-page .request-edit-form > .request-actions > button {
     position: static;
     display: inline-flex;
     flex: 1 1 0;
     align-items: center;
     justify-content: center;
-    width: auto;
+    width: 0;
     min-width: 0;
     max-width: 220px;
-    min-height: 46px;
+    min-height: 42px;
     margin: 0;
-    padding: 12px 10px;
-    border: 1px solid #0b1d2a;
-    border-radius: 9px;
-    font: inherit;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 9px 6px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
     line-height: 1.4;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    transform: none;
 }
 
-/* Speichern */
-.meine-anfragen-page .request-edit-form .request-actions button[type="submit"] {
-    border-color: #0b1d2a;
+.meine-anfragen-page .request-edit-form > .request-actions > .request-edit-button {
+    border: 1px solid #0b1d2a;
     background: #0b1d2a;
     color: #fff;
 }
 
-.meine-anfragen-page .request-edit-form .request-actions button[type="submit"]:hover {
-    background: #213b4d;
-}
-
-/* Abbrechen */
-.meine-anfragen-page .request-edit-form .request-actions button[type="button"] {
-    border-color: #d9d2c5;
-    background: transparent;
+.meine-anfragen-page .request-edit-form > .request-actions > .request-delete-button {
+    border: 1px solid #d9d2c5;
+    background: #fff;
     color: #0b1d2a;
 }
 
-.meine-anfragen-page .request-edit-form .request-actions button[type="button"]:hover {
-    background: #f3ebdc;
+@media (max-width: 600px) {
+    .meine-anfragen-page .request-edit-form > .request-actions {
+        gap: 8px;
+    }
+
+    .meine-anfragen-page .request-edit-form > .request-actions > button {
+        padding: 9px 4px;
+        font-size: 11px;
+    }
 }
 
-/* ---------- EMPTY / LOGIN MESSAGES ---------- */
+/* LOGIN AND EMPTY MESSAGES */
 
-.meine-anfragen-page > p,
-.meine-anfragen-page > div > p {
+.meine-anfragen-page .requests-login-prompt,
+.meine-anfragen-page .requests-empty,
+.meine-anfragen-page .requests-message {
+    max-width: 100%;
     color: #59636b;
     line-height: 1.8;
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
-.requests-login-prompt button {
+.meine-anfragen-page .requests-login-prompt button {
+    max-width: 100%;
     padding: 14px 32px;
     border: none;
     border-radius: 10px;
@@ -399,103 +423,105 @@
     color: #fff;
     font-size: 17px;
     font-weight: 700;
-    cursor: pointer;
     box-shadow: 0 4px 14px rgba(184, 149, 74, 0.3);
-    transition:
-        background 0.3s ease,
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.requests-login-prompt button:hover {
+.meine-anfragen-page .requests-login-prompt button:hover {
     transform: translateY(-2px);
     background: linear-gradient(135deg, #e5c982, #c5a45b);
     box-shadow: 0 6px 18px rgba(184, 149, 74, 0.4);
 }
 
-.requests-login-prompt button:active {
+.meine-anfragen-page .requests-login-prompt button:active {
     transform: translateY(0);
 }
 
-/* ---------- MOBILE ---------- */
+/* MOBILE */
 
 @media (max-width: 600px) {
     .meine-anfragen-page {
         padding: 35px 14px 55px;
     }
 
-    .meine-anfragen-page > ul {
+    .meine-anfragen-page > .requests-list {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .meine-anfragen-page > ul > li.request-card {
+    .meine-anfragen-page > .requests-list > .request-card {
         padding: 20px;
     }
 
-    .request-specs {
+    .meine-anfragen-page .request-card-header h2 {
+        font-size: 23px;
+    }
+
+    .meine-anfragen-page .request-specs {
         gap: 8px;
     }
 
-    .request-spec {
+    .meine-anfragen-page .request-spec {
         padding: 11px;
     }
 
-    .request-images-grid {
+    .meine-anfragen-page .request-images-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .meine-anfragen-page .request-edit-panel {
-        padding: 18px;
     }
 
     .meine-anfragen-page .request-edit-form {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .meine-anfragen-page .request-edit-form .request-actions {
-        flex-direction: row;
-        flex-wrap: nowrap;
+    .meine-anfragen-page .request-edit-form > .request-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 8px;
     }
 
-    .meine-anfragen-page .request-edit-form .request-actions button {
-        min-width: 0;
+    .meine-anfragen-page .request-edit-form > .request-actions > button {
         padding: 10px 5px;
         font-size: 12px;
     }
 
-    .meine-anfragen-page .request-card .request-actions {
+    .meine-anfragen-page .request-card > .request-actions {
         gap: 8px;
     }
 
-    .meine-anfragen-page .request-card .request-actions button {
-        min-width: 0;
+    .meine-anfragen-page .request-card > .request-actions > button {
         padding: 10px 12px;
     }
 }
 
-/* ---------- VERY SMALL SCREENS ---------- */
+/* VERY SMALL SCREENS */
 
 @media (max-width: 380px) {
-    .meine-anfragen-page .request-edit-form .request-actions {
+    .meine-anfragen-page {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .meine-anfragen-page > .requests-list > .request-card {
+        padding: 15px;
+    }
+
+    .meine-anfragen-page .request-edit-form > .request-actions {
         gap: 6px;
     }
 
-    .meine-anfragen-page .request-edit-form .request-actions button {
+    .meine-anfragen-page .request-edit-form > .request-actions > button {
         padding: 9px 4px;
         font-size: 11px;
     }
 }
 
-/* ---------- REDUCED MOTION ---------- */
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
     .meine-anfragen-page button {
         transition: none;
     }
 
-    .requests-login-prompt button:hover,
-    .requests-login-prompt button:active {
+    .meine-anfragen-page .requests-login-prompt button:hover,
+    .meine-anfragen-page .requests-login-prompt button:active {
         transform: none;
     }
 }

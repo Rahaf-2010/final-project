@@ -1,10 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import {
-    CarFront,
-    ClipboardList,
-    Star,
-    LayoutDashboard
-} from "lucide-react";
+import {CarFront, ClipboardList, Star, LayoutDashboard} from "lucide-react";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
